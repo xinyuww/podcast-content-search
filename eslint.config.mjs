@@ -16,9 +16,7 @@ const eslintConfig = defineConfig([
     ".venv/**",
     "work/**",
     "outputs/**",
-    ".wrangler/**",
     "data/raw/**",
-    "worker-runtime.d.ts",
     "next-env.d.ts",
   ]),
   eslint.configs.recommended,
@@ -33,7 +31,6 @@ const eslintConfig = defineConfig([
       globals: {
         ...globals.browser,
         ...globals.node,
-        ...globals.serviceworker,
       },
     },
     settings: {

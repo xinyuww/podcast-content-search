@@ -8,6 +8,12 @@
 
 过去关于“保留 Worker”“页面直接导入固定 JSON”“必须保留 public/demo-audio”的建议已失效。当前页面和 API 读取服务端 SQLite 快照，媒体读取 Blob。历史变更可通过 Git 记录追溯。
 
+2026-10-03 已清除停用的 `.openai/hosting.json`、`.vinext/`、`.wrangler/`、旧 workerd 的 `.pnpm-store/` 缓存和 `dist/` 构建产物（包含旧 Sites / Worker 配置）。同时清除项目内的 Finder `.DS_Store` 文件。忽略规则仍用于防止旧缓存或本机元数据意外进入 Git。
+
+当前隐藏配置保留 `.env.example`、`.gitignore`、`.vercelignore`；本地的 `.env.local`、`.vercel/`、`.git/`、`.next/`、`.venv/` 仍分别用于密钥、部署关联、版本管理、构建和 Python 环境。依赖内部的隐藏文件不作为项目旧配置清理。
+
+后续复查移除了根目录遗留的 `worker-runtime.d.ts`，以及 ESLint 中对应的文件排除项、Wrangler 缓存排除项和 Service Worker 全局变量设置。当前应用不使用 Worker 类型或运行时。
+
 ## 必须保留
 
 | 文件或目录 | 原因 |

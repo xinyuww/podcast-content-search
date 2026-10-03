@@ -81,6 +81,6 @@ npm run snapshot:verify
 
 ## 发布边界与版本记录
 
-`.gitignore` 排除密钥、原始数据库、音频和处理缓存；`.vercelignore` 进一步排除本地工具与非运行文件。旧试听产物在 `data/raw/legacy-demo-audio/`；`public/` 不发布原音频或数据库。历史 Sites 配置不参与当前 Vercel 部署。
+`.gitignore` 排除密钥、原始数据库、音频和处理缓存；`.vercelignore` 进一步排除本地工具与非运行文件。旧试听产物在 `data/raw/legacy-demo-audio/`；`public/` 不发布原音频或数据库。已移除停用的 Sites 托管配置，当前只使用 Vercel 部署。
 
 2026-10-03 的播放修复版本为 `3aec4da`，部署 ID 为 `dpl_2CGL8GxSnjMrts8Pmwayi2XjVBn4`：修正媒体类型，并将固定 20 秒加载超时改为进展感知的停滞计时。之后公开版声音获人工试听确认；自动化与未覆盖项见[测试与验收](testing.md)。这是已记录版本，不保证始终是仓库的最新提交。
