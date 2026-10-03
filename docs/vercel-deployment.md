@@ -1,95 +1,72 @@
-# Vercel 部署
+# Vercel 部署与音频发布
 
-当前目标：保留 15 期素材，部署真实需求对话、语义检索、3–5 段 / 10–30 分钟拼盘与自行托管的原音频播放。
+更新：2026-10-03。当前公开地址：[产品首页](https://podcast-content-search.vercel.app) · [固定 Demo](https://podcast-content-search.vercel.app/demo)。仓库为 [xinyuww/podcast-content-search](https://github.com/xinyuww/podcast-content-search)。
 
-## 在线架构
+## 当前部署架构
 
-- Next.js App Router + React：页面、交互和 API，Node.js 24。
-- `POST /api/needs`：调用既有需求理解模型，返回结构化需求。
-- `POST /api/playlists`：读取 SQLite 已有向量；只为当前查询调用 embedding API；余弦召回 30 段、标签规则排序、完整章节组合。无实时内容标注或生成式重排。
-- `GET /api/demo`：返回固定示例，不调用模型。
-- `server/data/corpus.sqlite3`：打包到服务端函数的只读快照，不位于 public，不提供数据库下载接口。
-- 浏览器直接请求专用 Vercel Blob 中的原始 MP3；按开始时间定位，到章节结束自动切下一段；全集使用同一个托管地址。不依赖官方音源。
-- SQLite 保存音频 URL、字幕、时间戳、标签与向量，MP3 二进制文件由 Blob 独立托管，不打包进函数。
-- Python、ffmpeg、原始 SQLite 用于本地素材处理，线上不启动 Python 服务。
+- Vercel 运行 Next.js 网页及 Node.js 24 API，区域配置为 `iad1`。
+- `/api/needs` 调用需求理解模型；`/api/playlists` 为当前查询生成向量，读取已有章节向量、规则排序并组盘。
+- `/demo` 与 `/api/demo` 读取固定拼盘，不调用模型。
+- `server/data/corpus.sqlite3` 是随服务端发布的只读快照，不位于 `public/`，没有数据库下载接口。
+- 浏览器直接播放专用 Vercel Blob 中的原单集音频，包含 10 个 MP3 和 5 个 M4A/AAC。片段和全集使用同一地址，以时间戳控制边界。
+- Python、ffmpeg、源数据库及音频缓存只用于本地素材维护；线上不启动 Python 服务，不使用 Worker，也不回退到官方音源。
 
-## 数据更新
+SQLite 保存素材、字幕、时间戳、标签、向量和音频地址；音频二进制独立存放于 Blob。完整关系见[系统架构](product-architecture.md)。
+
+## GitHub 自动部署
+
+Vercel 项目为 `podcast-content-search`，空间为 `xwei1`，已连接上述 GitHub 仓库。
+
+1. 将开发改动提交并推送到开发分支，Vercel 构建 Preview，可在 Deployments 中查看链接和状态。
+2. 预览确认后合并到 `main` 并推送，触发 Production 构建；构建成功后正式域名更新。
+3. 仅本地 commit 或 merge 不会更新网站。worktree 的文件夹位置也不决定部署目标，推送的分支才决定。
+
+项目采用 Next.js 框架，Node.js 24，安装命令 `npm ci`，构建命令 `npm run build`。`next.config.ts` 将 SQLite 快照纳入相关服务端路由的文件追踪。云端只校验快照，不运行转录、标注或向量化。
+
+## 环境变量
+
+`OPENAI_API_KEY` 在 Vercel 的 Production / Preview 环境分别配置为服务端 Secret。GitHub 只提供代码和快照；构建与运行时由 Vercel 注入对应环境变量。
+
+- 不提交 `.env.local`，不使用 `NEXT_PUBLIC_` 前缀，不需要把密钥写进 GitHub Actions。
+- 公开读取 Blob 音频不需要写入凭据；网页运行无需配置音频上传权限。
+- 修改环境变量后重新部署对应环境，才能使新部署使用配置。
+- 本机代理地址只用于本地，不上传到 Vercel。
+
+API 设有请求大小、同源、超时及共享的单实例最多 4 个活动请求限制；路由最大执行时间为 60 秒。部署记录中已设置 Vercel Firewall 对 `/api/` 的 POST 请求按 IP 每 60 秒限制 12 次。单实例并发和 IP 限制都不等于全局费用上限；云端设置以项目控制台为准。
+
+## 本地运行与验证
+
+日常开发见 [README](../README.md#本地运行)，不需要本地 Python 环境。发布前的自动化与人工检查见[测试与验收](testing.md)。
+
+### 本地代理
+
+如果本机访问模型或 npm 需要代理，可按实际端口设置。以下以 `127.0.0.1:7890` 为例，并要求 Node.js 24：
+
+```sh
+npm ci --proxy=http://127.0.0.1:7890 --https-proxy=http://127.0.0.1:7890
+HTTP_PROXY=http://127.0.0.1:7890 HTTPS_PROXY=http://127.0.0.1:7890 \
+http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890 \
+NO_PROXY=localhost,127.0.0.1 NODE_USE_ENV_PROXY=1 npm run dev
+```
+
+## 更新已有素材快照
+
+在有 `.venv`、`data/podcasts.sqlite3`、源音频缓存和上传清单的本地维护环境中执行：
 
 ```sh
 npm run snapshot:export
 npm run snapshot:verify
 ```
 
-导出需要本地 `.venv`、已有 `data/podcasts.sqlite3` 和音频缓存。它核对章节/标注/向量是否过期，用本地音频时长检查边界，复制已有向量；不调用模型、不重新转录、不修改源数据库。
+导出检查章节、标注、向量有效性、音频哈希和时间边界，复制已有向量，不调用模型、不重新转录，也不修改源数据库。当前快照包含 15 期、185 章、165 个向量、4,157 条字幕，其中 164 章可独立推荐。
 
-快照包含 15 期、185 章、165 个向量（164 章满足独立检索条件）、4,157 条字幕。`server/data/corpus.json` 保存源数据库哈希与快照哈希。更新这两个文件后重新部署即可。当前不保存用户会话、收藏或历史，也不向快照写入新查询。
+将 `server/data/corpus.sqlite3` 与 `server/data/corpus.json` 一起提交并发布。后者记录统计和哈希；不能只改其中一个文件。用户会话与新查询不会写入只读快照。
 
-## 本地运行与验证
+## 发布新增或修正的音频
 
-```sh
-npm ci
-npm run dev
-npm run test:web
-npm run test:python
-npm run build
-npm run test:production
-```
+音频 store 为 `podcast-demo-audio`，ID 为 `store_ELsFDSRO8QRM3Ptd`，专用域名记录在 `lib/audio-host.json`。当前约 625 MiB 的原始媒体独立托管，不打包进网页函数。
 
-网页运行无需 Python、ffmpeg 或本地音频缓存。第一次完整素材导出及 Python 测试仍需要本地语料。`.env.local` 的 `OPENAI_API_KEY` 仅供服务端使用。固定示例无需密钥，但播放托管音频需要网络。
-
-`test:production` 启动真实 Next.js 生产服务，对模型使用明确的测试替身；它不等于真实 OpenAI 联调通过。13 个语义场景的 Node 结果与原 Python 候选顺序、选中章节和状态作离线对照。
-
-### 本机代理
-
-此电脑已验证可用的 HTTP 代理为 `http://127.0.0.1:7890`。仅在本机运行时使用，不上传至 Vercel：
-
-```sh
-npm install --proxy=http://127.0.0.1:7890 --https-proxy=http://127.0.0.1:7890
-HTTP_PROXY=http://127.0.0.1:7890 HTTPS_PROXY=http://127.0.0.1:7890 \
-http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890 \
-NO_PROXY=localhost,127.0.0.1 NODE_USE_ENV_PROXY=1 npm run dev
-```
-
-需要 Node.js 24。`.env.local` 应填入真实 `OPENAI_API_KEY`；中文占位文字不是密钥，不要提交到 Git 或发到聊天。安装中断出现 `ENOTEMPTY` 时先确认没有其他安装进程，保留旧依赖目录后重装，不要删除数据库或锁文件。
-
-2026-10-02：已部署至 https://podcast-content-search.vercel.app 。48 项功能测试、5 项生产 HTTP 测试和 8 轮真实模型合成对话验收通过。需求模型遇到已完成但原话依据无效的输出时最多重新生成一次，两次共用 45 秒截止时间；拒绝和网络错误不重试。两条数据 API 的构建追踪包含 SQLite 快照。匿名公网访问首页、固定拼盘和真实对话/检索接口均成功；一个合成编程需求约 6 秒生成 3 段、779.548 秒拼盘。数据库、本地音频与 .env.local 路径均返回 404。浏览器自动化会话不可用，实际音频播放和手机端交互仍待人工试听。
-
-部署空间：`xwei1`（Hobby）；项目：`podcast-content-search`。最初通过 CLI 发布；2026-10-03 已连接 `xinyuww/podcast-content-search`，启用 GitHub 自动部署。
-
-上述 2026-10-02 版本的部署：`dpl_5jezMs9UYLcpUeJmvzomPKug1g7c`（使用官方音源，已由用户反馈播放失败）。`baseline-browser-mapping` 已更新到安全补丁版本；当时 `npm audit --omit=dev` 为 0 项已知漏洞。开发工具依赖仍有 8 项告警（7 high、1 low），未将其描述为全项目安全审计通过。
-
-2026-10-03：部署 `dpl_3orgExAepGkuvr6bV1rLiuTDMjX7` 将全部 15 期切换到专用 Blob 中的本地原始 MP3。15/15 文件的开头与中间 Range 请求均返回 HTTP 206，字节与本地一致；50 项网页功能测试、43 项 Python 测试、5 项生产 HTTP 测试、类型检查、lint 与构建通过。源数据库 SHA-256 未变。匿名公网首页与固定拼盘成功，真实合成需求生成 3 段 / 956.708 秒拼盘（`partial_match`，约 5.7 秒），两类拼盘均返回新音源。报告在 `outputs/hosted-audio-verification.json` 与 `outputs/public-verification.json`。浏览器自动化导航仍超时，未完成实际出声、进度条走动和手机端实机验收；HTTP 分段读取检查不能替代这些验证。
-
-## Vercel 项目设置
-
-1. 使用 Vercel Hobby（个人非商业 demo，受免费额度限制），选择 Next.js 框架和 Node.js 24。
-2. 部署代码和 `server/data/` 快照。Git 导入时把快照一起提交；CLI 部署使用 `.vercelignore` 排除原音频、本地数据库、密钥和处理缓存。
-3. 在 Vercel 的服务端环境变量中设置 `OPENAI_API_KEY`，不要加 `NEXT_PUBLIC_` 前缀。Production/Preview 分别按需要配置。
-4. 构建命令 `npm run build`；快照在本地导出，云端只校验，不运行素材处理流程。
-5. 发布后验收首页、固定拼盘、真实对话、新查询检索、片段跳播、自动换段、全集返回、手机端。确认公开访问无需 Vercel 登录。
-
-`vercel.json` 选择 iad1 部署区域，API 最大执行时间 60 秒。应用设置输入大小限制、同源校验、超时和单实例并发上限。已在 Vercel Firewall 启用 `Demo API rate limit`：对 `/api/` 下 POST 请求按 IP 限制为每 60 秒 12 次。此限制不是全局消费金额上限，也不能完全防止分布式滥用；继续在 OpenAI 项目侧管理用量。不要把只读 SQLite 改为用户访问计数器。
-
-专用 `OPENAI_API_KEY` 保存在项目 Production 和 Preview Secret，未写入代码或 Git 仓库。`.env.local` 和 `.vercel/` 均被 Git 忽略。公开域名不需要 Vercel 登录，部署预览地址保留现有平台保护。
-
-## GitHub 自动部署
-
-- 仓库：`xinyuww/podcast-content-search`；生产分支：`main`；Preview 部署已启用，没有额外的忽略构建命令。
-- 将修改 commit 后 push 到开发分支（例如 `codex/ui-design`），Vercel 自动构建并生成预览链接。在 Vercel Deployments 中按分支查看状态和链接。
-- 预览确认后，把开发分支合并到 `main` 并 push，成功构建后正式域名 `https://podcast-content-search.vercel.app` 自动更新。仅本地 commit 或 merge 不会更新网站。
-- GitHub 提供代码和只读 SQLite 快照；Vercel 注入对应环境的服务端 Secret。无需上传 `.env.local`，也不需要把 Secret 写进 GitHub Actions。
-- 预览和正式版都读取同一批 Blob 音频，不重新上传或转录。公开音频读取不需要 Blob 写入凭据。
-- 在 GitHub Desktop 添加 worktree 只是管理界面的选择，不是自动部署的前提；决定部署目标的是 push 的分支。
-- CLI 部署仍可用于手动发布，但日常更新以 GitHub 分支流程为准。
-
-2026-10-03 播放问题排查：发现 5 期 M4A/AAC 被错误命名并发布为 MP3 / `audio/mpeg`，包含固定 Demo 首段。发布脚本现按文件头识别容器，使用新的 `.m4a` 地址和 `audio/mp4`，避免缓存旧的错误类型。原文件字节与时间轴不变，源数据库和字幕无需重建。通过当前代理读取 Demo 首集前 1.5 MB 实测约 28 秒，旧播放器会在 20 秒时打断仍有进展的加载；已改为进展感知的停滞计时。新增格式、快照及线上媒体类型校验脚本。本地 56 项网页测试、43 项 Python 测试、6 项生产页面/API 测试、类型检查、lint 和构建通过。修正后的云端分段检查与解码检查未获执行许可，尚未执行；浏览器自动化不可用，最终出声和进度条仍需实机验收。
-
-## 音频发布流程
-
-专用公开 Blob store：`podcast-demo-audio` / `store_ELsFDSRO8QRM3Ptd`，iad1，连接本项目 production 和 development，使用 OIDC 身份认证。15 期原音频共约 625 MiB，实际包含 10 个 MP3 和 5 个 M4A/AAC；本地缓存统一使用 `.mp3` 后缀，不代表真实格式。按用户指定的合法使用素材演示假设发布，保留原节目链接。
-
-1. 本地登录 Vercel CLI，刷新该项目 development 环境的 OIDC 凭据（不输出 `.env.local`）。设置 `VERCEL_CLI` 为已安装 CLI 的绝对路径。
-2. 运行以下命令；本机如需代理，使用上文环境变量。上传脚本先核对原文件 SHA-256，读取文件头识别真实容器，以 `.mp3` / `audio/mpeg` 或 `.m4a` / `audio/mp4` 发布，按带内容哈希的路径上传，逐个保存结果，重跑可跳过已完成项目。
+此流程只在素材维护时运行，需要源音频、Vercel CLI 登录及关联项目的 development OIDC 凭据；通过 CLI 获取凭据，不打印 `.env.local`。`VERCEL_CLI` 指向已安装 CLI 的绝对路径。
 
 ```sh
 BLOB_STORE_ID=store_ELsFDSRO8QRM3Ptd node --env-file=.env.local scripts/upload-audio.mjs
@@ -98,14 +75,12 @@ npm run snapshot:export
 npm run snapshot:verify
 ```
 
-3. `data/hosted-audio.json` 记录 URL、哈希、字节数与真实媒体类型；`lib/audio-host.json` 固定允许的托管域名。验证脚本对每期文件开头和中间发 Range 请求，要求 HTTP 206、正确 Content-Range、与实际容器一致的 Content-Type 和与本地完全相同的字节；报告写入 `outputs/hosted-audio-verification.json`。
-4. 导出快照会核对上传记录与源数据库音频哈希，保留原文件时间轴，将固定拼盘和全部章节的播放地址一起替换。没有官方地址回退。
-5. 运行功能测试、构建与生产 HTTP 测试后重新部署。播放器连续 20 秒无加载进展才显示可重试错误；实际下载进展会重置停滞计时，但总加载上限为 120 秒。暂停、切片和销毁时清理计时器。
+上传脚本核对原文件 SHA-256，并按文件头识别容器，以 `.mp3` / `audio/mpeg` 或 `.m4a` / `audio/mp4` 发布。不能依据本地缓存的 `.mp3` 后缀判断真实格式。文件路径带内容哈希，结果逐个记录，重跑可跳过已完成项目。
 
-Hobby 的 Blob 存储和传输受免费额度限制，查看 [官方额度说明](https://vercel.com/docs/vercel-blob/usage-and-pricing)；音频传输流量随试听次数增长。
+`data/hosted-audio.json` 保存 URL、哈希、字节数和媒体类型。验证脚本检查文件开头与中间的 Range 响应、类型和字节一致性；它不能代替浏览器试听。快照导出统一替换固定和动态拼盘的音源，保留原文件时间轴。发布后还需测试实际播放、定位、自动换段和全集返回。
 
-## 历史文件
+## 发布边界与版本记录
 
-`data/raw/legacy-demo-audio/` 保存以前导出的本地试听文件。旧 `data/demo-playlist.json` 作为固定选择的本地输入保留，但不进入客户端 bundle。导出快照时替换为 Blob 地址和原音频偏移。
+`.gitignore` 排除密钥、原始数据库、音频和处理缓存；`.vercelignore` 进一步排除本地工具与非运行文件。旧试听产物在 `data/raw/legacy-demo-audio/`；`public/` 不发布原音频或数据库。历史 Sites 配置不参与当前 Vercel 部署。
 
-原 Sites 站点及 `.openai/hosting.json` 仅保留为历史记录，不参与 Vercel 构建；本次不修改旧站点。
+2026-10-03 的播放修复版本为 `3aec4da`，部署 ID 为 `dpl_2CGL8GxSnjMrts8Pmwayi2XjVBn4`：修正媒体类型，并将固定 20 秒加载超时改为进展感知的停滞计时。之后公开版声音获人工试听确认；自动化与未覆盖项见[测试与验收](testing.md)。这是已记录版本，不保证始终是仓库的最新提交。

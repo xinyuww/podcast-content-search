@@ -1,11 +1,11 @@
 # 真实中文播客素材集
 
-更新：2026-10-01。当前目标为本地研究与演示；尚未公开发布。
+更新：2026-10-03。当前 15 期素材已用于[公开 Demo](https://podcast-content-search.vercel.app)。网页运行使用只读 SQLite 快照与 Vercel Blob 原音频，本地源库用于素材维护。
 
 ## 已完成
 
 已导入 4 档节目共 15 期中文播客，约 16.86 小时，
-包含 140 个官方章节、4,157 条字幕 cue、431 个按原字幕边界组成的检索窗口。
+包含 140 个发布方章节和 4,157 条字幕 cue；源库另保留 431 个早期字幕窗口，当前推荐不使用这些窗口。
 另有 4 期《编码人声》的 45 个模型生成并经文本复查的主题章节（36 个主体内容），保存在独立 `topic_chapters` 表；处理过程和核听限制见 [主题分段](topic-segmentation.md)。
 11 期复用发布方 VTT，4 期通过 `gpt-4o-transcribe-diarize` 转录，共新增 1,582 条字幕。
 本地数据库：`data/podcasts.sqlite3`。清单：`data/collection.json`。
@@ -17,15 +17,15 @@
 
 ## 来源与使用范围
 
-- 官方节目页：https://dao.fm/show/ld
-- 官方 RSS：https://feeds.daopub.com/ld.xml
-- 使用条件：https://dao.fm/copyright（核查于 2026-09-30）
+- 官方节目页：[科技乱炖](https://dao.fm/show/ld)
+- 官方 RSS：[科技乱炖 RSS](https://feeds.daopub.com/ld.xml)
+- 来源使用说明：[发布方说明](https://dao.fm/copyright)；采集记录核查日期为 2026-09-30，不代表本演示取得了单独授权。
 - 新增 10 期统一在小宇宙选集，再匹配公开 RSS；选集记录见 `data/selection-tech-work-10.json`。
 - 每集音频 URL 均来自 RSS；11 期字幕及 140 个章节也来自 RSS，另 4 期字幕由原音频转录。没有从节目简介生成伪转录。
-- 官方声明第三条允许第三方通过 RSS/API 引用、展示、播放；这不等于开放数据许可。
-- 15 期音频均完整下载至 `data/raw/audio/`，共 654,889,539 字节（约 655 MB），仅供本地演示；保留官方 URL。没有公开托管。
-- 原始字幕缓存和数据库仅存本地，已加入 Git 忽略；不作为开源数据集上传。
-- 后续若公开展示转录摘录、改编摘要或重新编排音频，需要结合具体呈现核实对应使用范围。
+- RSS 提供下载入口不等于开放数据许可；本演示按可合法使用素材的假设托管音频，并保留来源。
+- 15 期原音频缓存在 `data/raw/audio/`，共 654,889,539 字节（约 625 MiB），已发布到专用 Vercel Blob。线上播放使用托管地址；官方 URL 用于来源追溯。
+- 原始字幕缓存、源数据库与原音频文件被 Git 忽略；派生的 `server/data/corpus.sqlite3` 随代码提交，包含网页所需的字幕、章节、标签和向量。仓库不是仅含空结构的数据库模板。
+- 本项目的演示假设不构成素材授权核实；复制代码也不意味着自动取得素材再分发授权。
 
 ## 数据结构与真实性
 
@@ -36,44 +36,31 @@ VTT 保留原文件和 cue 原始 payload；提取文本仅移除字幕格式标
 说话人是来源中的编号标签，不擅自认定为具体嘉宾。
 窗口按章节和字幕边界组合，目标不超过 180 秒，不人工编造时间戳。
 一段开头字幕没有落在官方章节范围内，保留为未归属章节，不丢弃。
-短窗口、片头、片尾、赞助和上下文不完整片段尚未人工筛选。
+后续章节标注已区分主体、片头、片尾和赞助等内容，并排除明确依赖上下文的独立推荐；尚未全量人工核听。
 
 已经验证：字幕与章节时间在单集时长范围内，外键和数据库完整性正常，
 每条 cue 恰好归入一个窗口，窗口文字和时间可回溯到原始 cue。
 2026-09-30 已验证：15 个本地音频全文件解码通过，时长与 RSS 相差不足 1 秒。每期按字幕起止时间提取前、中、后三处原声窗口，共 45 段，输出时长检查通过。原音频路径、SHA-256 与文件大小已写入 `source_assets`，kind 为 `audio`。
 报告：`data/local-audio-report.json`；试听片段：`data/raw/auditions/`。这些片段剪自原音频，不是语音合成。核听页面：`data/raw/review/index.html`。
-主产品网页已接入其中 4 期的固定章节及本地全集，主要播放流程已在浏览器验证，见 [固定拼盘演示](functional-demo.md)。这些 UI 验证发生在音频处理报告之后，报告中的 `browser_playback=not_verified` 仍保留该脚本运行时的状态。
-尚未完成：全部素材逐句听感对齐、转录准确率核验、语义检索质量评估。时长和解码通过不代表已经核听确认逐句对齐。
-2026-10-01 已完成 185 个统一章节标注及 165 个章节向量，默认 164 个独立检索候选。`search_content.py` 提供向量召回与标签规则排序，旧 `corpus.py search` 仍是关键词子串匹配。主网页继续使用固定真实拼盘，尚未接入新检索。处理与评测见 [内容检索](content-retrieval.md)。
+主产品已接入固定 Demo 与动态检索，统一从 Blob 播放原单集。公开版声音已获人工试听确认，见[固定拼盘演示](functional-demo.md)和[测试与验收](testing.md)。历史脚本报告中的 `browser_playback=not_verified` 保留脚本执行当时的状态，不用于否认后续试听，也不改写成全量通过。
 
-## 本地使用
+185 个统一章节已完成标注，其中 165 个有向量、164 个满足独立推荐条件。线上检索由 `server/retrieval.ts` 执行；`backend/search_content.py` 是离线参考，旧 `backend.corpus search` 仍是关键词子串匹配。已有小规模开发场景对照，尚未完成独立推荐质量评估、全量转录准确率核验和逐句听感对齐。详见[内容检索](content-retrieval.md)。
 
-对已经生成的本地素材进行重建、检查和关键词搜索，只需 Python 3 标准库，无 API 密钥。
-下载配置仅包含发布方已有字幕/章节；4 期机器字幕需要先生成或使用本地缓存。
+## 本地维护
+
+运行网页只需按 [README](../README.md#本地运行) 安装 Node 依赖。以下命令针对已经具备源数据库、字幕和音频缓存的本地素材环境，不是网页启动步骤。
 
 ```sh
-python3 -m backend.corpus download-config > /private/tmp/podcast-corpus-download.cfg
-curl --config /private/tmp/podcast-corpus-download.cfg
-python3 -m backend.corpus build
-python3 -m backend.pipelines.segment_topics --import-results
 python3 -m backend.corpus check
 python3 -m backend.corpus search 焦虑
-python3 -m unittest discover -s tests -p 'test_*.py'
-```
-
-对已下载音频重复检查并生成本地试听片段：`python3 -m backend.pipelines.verify_local_audio`（需安装 ffmpeg / ffprobe）。
-
-```sh
 python3 -m backend.pipelines.audit_transcripts
 python3 -m backend.pipelines.build_audio_review
 python3 -m http.server 8765 --bind 127.0.0.1 --directory data/raw
 ```
 
-在浏览器打开 `http://127.0.0.1:8765/review/`。这是仅本机可访问的核听页，不是公开上线地址。
+核听页在 [http://127.0.0.1:8765/review/](http://127.0.0.1:8765/review/)，仅用于本地素材检查。重复检查原音频并生成试听片段可运行 `python3 -m backend.pipelines.verify_local_audio`，需要 ffmpeg / ffprobe。
 
-`build` 重复执行不会增加重复行，只替换清单中选定单集的派生记录，不删除其他单集。
-导入前先验证所有字幕与章节；缺文件、格式异常、时间越界会报错。
-SQLite 是当前本地素材库，不是已连接的 Supabase；今后迁移时要保留毫秒时间、来源和核听状态。
+不要为启动网页重建源库。`backend.corpus build` 会替换所选单集的派生记录，并级联清除关联章节索引；真正重建后须依次恢复主题章节、标注、向量，再导出网页快照。恢复步骤见[内容索引维护](content-retrieval.md#本地索引维护与恢复)。导出与音频发布见[部署文档](vercel-deployment.md)。
 
 ## 4 期云端转录（已完成）
 
@@ -91,13 +78,9 @@ SQLite 是当前本地素材库，不是已连接的 Supabase；今后迁移时�
 API 密钥保存在忽略 Git 的 `.env.local`，不写入日志。输出带起止时间的 VTT 与含模型、
 原音频校验和及处理记录的 `.asr.json`。`backend/pipelines/transcribe_local.py` 保留为历史备选；公共函数已抽到 `backend/common.py`；不属于日常演示运行步骤。当前清单已经没有 `local_asr` 项，直接使用其旧 `--benchmark` 流程可能因没有待处理单集而报错。重新采用本地转录前应先调整输入筛选，不能直接照旧命令重跑已完成素材。
 
-本地脚本按 5 分钟处理，边界附带 2 秒上下文，每个词按中点分配到一个原音频时间段。
-断点保存在 `data/raw/asr-checkpoints/`。此 Intel Mac 使用 Numba workqueue 后端，
-避免 Numba 与 PyTorch 的不同 OpenMP 运行库冲突。
-
 ### 已完成的云端流程（历史 / 维护参考）
 
-当前 15 期已完成，不需要为启动 Demo 执行下列步骤。特别是 `--prepare` 会更新状态报告，`--run` / `--benchmark` 可能上传音频并计费。日常只需前端启动；调整拼盘只运行 `npm run demo:prepare`。
+当前 15 期已完成，不需要为启动 Demo 执行下列步骤。特别是 `--prepare` 会更新状态报告，`--run` / `--benchmark` 可能上传音频并计费。日常只需启动 Next.js；修改固定选段后运行 `npm run demo:prepare`，再运行 `npm run snapshot:export` 与 `npm run snapshot:verify`。
 
 `data/openai-asr-report.json` 记录实时进度；只有 `status=transcribed` 且 `complete=true`
 表示 4 期所有请求均已返回并生成字幕；本次为 25/25 段。各段响应独立保存，中断重跑时复用。
@@ -132,16 +115,6 @@ python3 -m backend.pipelines.finalize_corpus
 保留为未索引的待核验条目。详见 `data/transcript-audit.json` 和对应 `.asr.json`，不为它们编造播放区间。
 原 5 期数据库和清单备份在 `data/raw/backups/`。
 
-## 扩大到不限主题的路线
+## 后续扩充
 
-以下仅为后续研究路线。本阶段固定 15 期，不执行扩充。
-
-1. 先定义榜单来源、统计日期与排名口径：订阅量、单集播放量、节目平均播放量不可混用。
-2. 建立约 500 档节目的目录，记录官方 RSS、分类、公开单集数、转录覆盖率、来源条件。
-3. 先索引 RSS 元数据和已有转录；不把缺失的转录当作已索引内容。
-4. 按领域覆盖选择首批 100–300 集，统计音频小时数，再评估转录预算与计算资源。
-5. 补足授权范围内的转录、人工抽检时间对齐、生成向量、用测试问题评估检索，再扩到全量。
-
-500 档×平均 200 集×平均 1 小时只是一个估算场景，即 100,000 音频小时；
-64–128 kbps 原音频约 2.9–5.8 TB（十进制），不是当前榜单的实测规模。
-只增加节目数量不能保证每个问题都有匹配；需要评估主题覆盖、切片质量、排序和无结果判断。
+本阶段固定 15 期，不执行扩充。新增素材仍沿用“小宇宙选集 → 检查公开 RSS → 下载原音频 → 复用字幕或转录 → 分章、标注与向量化 → 核验与导出”的本地流程。当前四档节目同属一个网络，增加数量前应关注领域与帮助类型的覆盖，而非只追求集数。

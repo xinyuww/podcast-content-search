@@ -52,9 +52,9 @@
 规则分 = 相似度 + 0.10 × 帮助偏好覆盖率 + 0.08 × 形式偏好覆盖率 + 0.04 × 主题偏好覆盖率。
 没有填写某类偏好时，该项不加分。相似度低于 0.35 的段落不允许靠标签加分进入结果。这个阈值是在本次小样本上调整的启发式参数，不是相关概率或经验证的置信度。
 
-没有对召回段落再次调用生成式模型。当前检索命令的需求标签由 CLI 参数或测试场景给定；需求对话现已输出同一套标签，并可通过页面按钮将需求交给动态拼盘接口，调用同一检索流程。
+没有对召回段落再次调用生成式模型。当前检索命令的需求标签由 CLI 参数或测试场景给定；需求对话现已输出同一套标签，在需求就绪后自动交给 Next.js 动态拼盘接口。在线实现为 `server/retrieval.ts`，Python 保留为离线参考。
 
-结果包含 `candidates_found`、`partial_match` 或 `insufficient_coverage`；缺少用户期望的帮助类型会显示在 `unmet_preferences`。`candidates_found` 仅表示当前规则找到候选，不代表用户需求已满足。节目中的历史、商业和观点内容只是原节目表述，检索不会核实或更新这些主张。
+离线 CLI 的结果包含 `candidates_found`、`partial_match` 或 `insufficient_coverage`；缺少用户期望的帮助类型会显示在 `unmet_preferences`。`candidates_found` 仅表示当前规则找到候选，不代表用户需求已满足。节目中的历史、商业和观点内容只是原节目表述，检索不会核实或更新这些主张。
 
 ## 小规模验证与限制
 
@@ -74,7 +74,7 @@
 
 详细结果：[检索对比报告](../data/retrieval-evaluation.md)。
 
-工程检查：35 项 Python 测试通过；在禁止网络连接的条件下重新执行 prepare、annotate、embed 和 13 场景 evaluate 均成功，向量指纹和 65 份 API 响应缓存数量保持不变。7 张原始素材表与处理前逐表哈希一致；SQLite 完整性和外键检查通过。
+索引建立时的工程检查（2026-10-01）：35 项 Python 测试通过；在禁止网络连接的条件下重新执行 prepare、annotate、embed 和 13 场景 evaluate 均成功，向量指纹和 65 份 API 响应缓存数量保持不变。7 张原始素材表与处理前逐表哈希一致；SQLite 完整性和外键检查通过。
 
 ## 文件与数据库
 
@@ -86,9 +86,11 @@
 
 脚本为 `backend/content_index.py` 和 `backend/search_content.py`。标注可移植导出在 `data/content-annotations.json`；词表在 `data/content-taxonomy.json`；抽查修订在 `data/content-annotation-reviews.json`；统计在 `data/content-index-report.json`。
 
-`data/raw/content-index/` 保存带原文的请求、原始响应、查询向量及向量批次缓存，被 Git 忽略。API key 只在进程中读取，缓存不包含认证头。当前没有前端依赖这些文件或密钥。
+`data/raw/content-index/` 保存带原文的请求、原始响应、查询向量及向量批次缓存，被 Git 忽略。API key 只在进程中读取，缓存不包含认证头。这些本地缓存不是网页运行依赖。在线服务读取 `server/data/corpus.sqlite3` 中已有章节向量，并为每个新检索请求调用查询向量 API；不使用此处 Python 查询缓存或 `PODCAST_OFFLINE` 开关。
 
-## 使用与恢复
+## 本地索引维护与恢复
+
+以下步骤仅用于具备源库与缓存的本地维护环境，不是网页启动流程。线上返回 `ready`、`partial_match` 或 `insufficient_coverage`，组盘约束见[动态拼盘](dynamic-playlists.md)。
 
 已有 `.venv` 包含 tiktoken 0.14.0。独立环境只需要 Python 标准库和 `requirements-retrieval.txt`，无需安装 Whisper 来运行检索。首次加载分词器需下载其配置。
 

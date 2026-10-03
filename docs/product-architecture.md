@@ -1,142 +1,79 @@
-> 2026-10-01 部署迁移：当前网页与在线 API 使用 Next.js / Vercel，检索读取 `server/data/corpus.sqlite3` 只读快照，播放直接使用官方音频。本文包含旧本地服务的历史说明；当前运行方式见 [Vercel 部署](vercel-deployment.md)。
+# 当前系统架构
 
-# 声签：当前架构与模块职责
+更新：2026-10-03。本文描述已发布的 Next.js / Vercel 版本；代码基线为 `3aec4da`。
 
-更新日期：2026-10-01。以当前源码和本地 SQLite 为准。15 期素材固定，未公开部署。
+## 运行组成
 
-## 1. 当前组成
+网页、需求对话和检索 API 都由 Next.js 的 Node.js 24 服务执行。在线数据来自只读 SQLite 快照，原音频由 Vercel Blob 提供。Python 留在本地素材维护与参考实现中，不参与公开网站的请求链路。
 
-**React 前端 + vinext 页面 / 需求服务 + 本地 Python 检索与媒体服务 + SQLite + 本地原音频。** 结构化需求到动态拼盘已接通；外部 OpenAI 网络验收按用户要求暂停，当前验证使用已有查询缓存。
-
-| 层 | 实现 | 职责 |
+| 层 | 入口 | 职责 |
 | --- | --- | --- |
-| 前端 | React 19、TypeScript、CSS | 对话、需求结构与纠正、动态拼盘、片段 / 全集播放 |
-| 页面与需求 API | vinext / Vite、Worker 入口、`server/needs.ts` | 渲染页面；`POST /api/needs` 调用模型整理需求 |
-| 本地检索与媒体服务 | Python `ThreadingHTTPServer`，127.0.0.1:8766 | `POST /api/playlists` 检索与组盘；`GET/HEAD /media/episodes/<id>` 原音频分段读取 |
-| 素材库 | `data/podcasts.sqlite3` | 节目、字幕、章节、标注和向量；在线请求只读 |
-| 文件系统 | `data/raw/`、`public/demo-audio/` | 15 期原音频及来源文件；固定演示的裁切媒体 |
-| 离线处理 | Python、ffmpeg / ffprobe、模型 API | 选集、转录、主题分段、标注、向量化、媒体检查和固定演示导出 |
+| 页面 | `app/page.tsx`、`app/demo/page.tsx` | 首页需求对话、独立固定试听页面 |
+| 界面 | `components/`、`lib/player.ts` | 对话、拼盘、字幕与播放状态 |
+| 需求 API | `app/api/needs/route.ts`、`server/needs.ts` | 调用需求模型，校验结构和原话引用 |
+| 检索 API | `app/api/playlists/route.ts`、`server/retrieval.ts` | 查询向量、候选排序和拼盘组合 |
+| 固定 Demo | `app/api/demo/route.ts`、`server/snapshot.ts` | 从快照返回固定选段，不调用模型 |
+| 服务端数据 | `server/data/corpus.sqlite3` | 只读保存章节、字幕、标签与向量 |
+| 音频存储 | Vercel Blob | 独立托管 MP3 / M4A 原文件 |
+| 离线处理 | `backend/`、音频发布脚本 | 采集、转录、分章、标注、向量化和快照导出 |
 
-项目使用 Next 风格 `app/` 布局，但由 vinext / Vite 启动构建。没有 Supabase、D1 / Drizzle、独立向量数据库或用户账户。
-
-## 2. 用户流程
+## 在线数据流
 
 ```mermaid
 flowchart TD
-    U[React 对话] --> N[POST /api/needs]
-    N --> O[OpenAI: 需求理解]
-    O --> N
-    N --> P[结构化需求与追问]
-    P --> U
-    P --> C[确认后点击生成拼盘]
-    C --> S[POST /api/playlists]
-    DB[(本地 SQLite)] --> S
-    S --> E[查询向量与候选召回]
-    E --> R[标签排序与排除]
-    R --> A[3–5 个完整章节 / 10–30 分钟]
-    A --> PLAYER[现有播放器]
-    AUDIO[本地原音频] --> MEDIA[HTTP Range 媒体服务]
-    MEDIA --> PLAYER
-    FIXED[固定示例 JSON 和裁切音频] --> PLAYER
+    UI[浏览器输入与必要追问] --> N[POST /api/needs]
+    N --> LLM[需求理解模型]
+    LLM --> N
+    N --> PROFILE[结构化需求]
+    PROFILE --> API[POST /api/playlists]
+    API --> EMB[生成当前查询向量]
+    DB[(服务端 SQLite 只读快照)] --> API
+    EMB --> API
+    API --> RANK[语义召回与标签规则排序]
+    RANK --> MIX[完整章节组合]
+    MIX --> PLAYER[浏览器播放器]
+    BLOB[Vercel Blob 原音频] --> PLAYER
+    DB --> DEMO[GET /api/demo 或 /demo 服务端页面]
+    DEMO --> PLAYER
 ```
 
-需求对话收到完整 `messages`，每轮重新生成当前需求。检索仅收到 `search_query + preferences`、准备状态及词表版本，不收到完整对话。准备就绪后由用户点击生成；有未发送的修改时不能使用旧需求生成拼盘。
+需求 API 接收完整对话，每轮重新生成当前需求。前端只展示必要的追问，不展示内部 JSON；当 `ready_to_recommend=true` 时自动向检索 API 提交 `search_query`、`preferences`、准备状态与词表版本。检索 API 不接收完整对话。
 
-新查询通过与内容侧相同的 embedding 模型生成查询向量；已有缓存可以直接复用。无足够相关章节或无法满足段数 / 时长约束时明确返回不足，不用固定片段冒充匹配结果。部分标签未覆盖时展示缺项。
+每次动态检索为当前查询调用一次 embedding API，内容向量直接从快照读取。当前 Node 实现不保存或读取离线查询缓存；也不在召回后逐段调用生成式模型重排。缺少合规组合时返回覆盖不足，固定 Demo 是单独入口。
 
-## 3. 服务接入与启动
+## 两份 SQLite 的边界
 
-`npm run dev` 运行 `scripts/dev.mjs`，同时启动 Python 服务和 vinext。Python 绑定端口成功后才启动页面；任一服务退出时停止另一服务。`PODCAST_OFFLINE=1 npm run dev` 仅禁止检索生成新查询向量，不会让对话模型离线运行。
+| 数据 | 本地源库 `data/podcasts.sqlite3` | 在线快照 `server/data/corpus.sqlite3` |
+| --- | --- | --- |
+| 使用方 | 本地 Python 工具 | Node 服务端 |
+| 更新方式 | 显式素材处理命令写入 | 本地导出后随代码发布，运行时只读 |
+| 内容 | 来源、缓存路径、字幕、原章节、派生索引与处理记录 | 在线所需的素材、章节、字幕、标签、向量与固定拼盘 |
+| 是否进入 Git | 否 | 是 |
+| 是否向浏览器下载 | 否 | 否；仅通过 API 返回必要的播放数据 |
 
-开发 Worker 不能直接连接宿主机 loopback，所以开发模式的 `/api/playlists` 和 `/media/episodes/` 由 Vite 的 Node 代理转发。生产构建的本地 Node 服务通过 `server/corpus.ts` 固定转发到 127.0.0.1:8766。`worker/index.ts` 还负责 `/api/needs` 和页面分流。
+快照共 6 张表：
 
-这是当前本地演示架构。代码依赖本机 SQLite 和音频文件；若以后迁到云端，需要重新安排持久化存储、媒体 URL 和后端运行环境，不能直接把 loopback 服务视为云端数据库连接。
-
-## 4. 前端与共享模块
-
-| 文件 | 职责 |
+| 表 | 内容 |
 | --- | --- |
-| `app/page.tsx` | 薄页面入口，装配产品组件 |
-| `components/listening-experience.tsx` | 对话 / 结果视图、动态或固定拼盘状态、卡片与播放器界面 |
-| `components/needs-conversation.tsx` | 对话、纠正、取消、JSON 导出 / 恢复、按需求生成拼盘、失败与覆盖不足提示 |
-| `lib/player.ts` | 唯一活动音频、相对 / 绝对时间换算、章节边界连播、全集与拼盘位置恢复 |
-| `lib/needs.ts` | 共享标签 Schema、需求与原话引用校验、已导出需求恢复 |
-| `lib/playlist.ts` | 拼盘数据契约、段数 / 时长 / 音频 URL 的前端校验 |
-| `data/demo-playlist.json` | 原固定 4 段真实演示，约 19 分 13 秒，作为独立试听入口保留 |
-| `app/globals.css`、`app/layout.tsx` | 样式与页面外壳 |
+| `metadata` | Schema、词表、向量模型、维度、源库哈希和统计 |
+| `episodes` | 15 期节目与 Blob 音频地址 |
+| `chapters` | 185 章及标注，164 章标为独立可推荐 |
+| `embeddings` | 165 个 1,536 维向量 |
+| `transcript_cues` | 4,157 条字幕及原始时间 |
+| `demo` | 固定 4 段拼盘 |
 
-动态片段直接读取原音频，`audioOffset=start` 将原单集秒数映射成片段内进度；到章节终点暂停并切换。固定片段使用裁切文件，offset 默认为 0。全集播放结束不会自动切换节目。返回对话会暂停并保留拼盘位置，新拼盘替换时释放旧音频。
+`server/snapshot.ts` 以只读方式打开数据库，并检查 Schema、词表与向量模型。章节记录可缓存在服务端实例内存中；新查询向量不写回快照。`next.config.ts` 将快照纳入两个数据 API 和 `/demo` 页面所需的服务端文件。
 
-共享辅助函数在 `backend/common.py`，项目根路径在 `backend/paths.py`。在线 Python 模块不依赖离线 `pipelines/`；Python 工具通过 `python -m backend.…` 运行。
+## 音频与用户状态
 
-## 5. 后端与处理工具
+片段和全集使用同一个 Blob 地址。播放器通过 `audioOffset=start` 把原单集时间换算成片段内进度，播放到章节终点后切换下一段。音频不存入 SQLite，不经过 Next.js 音频代理，不依赖节目官方播放服务器。官方页面链接仅用于查看来源。
 
-| 文件 | 职责 |
-| --- | --- |
-| `server/needs.ts` | 对话提示词、Responses API、结构校验、超时 / 错误处理 |
-| `server/corpus.ts` | 受限路由的本地服务桥接，流式传递音频 Range 响应 |
-| `backend/playlist_service.py` | 校验需求、调用检索、枚举合规章节组合、返回播放器数据、媒体服务 |
-| `backend/search_content.py` | 向量召回最多 30 段、标签硬排除与加权排序、离线检索评测 |
-| `backend/content_index.py` | 统一内容单元、摘要标签、embedding、缓存恢复与过期检查 |
-| `backend/pipelines/segment_topics.py` | 无发布方章节的 4 期节目按完整字幕生成主题边界 |
-| `backend/corpus.py` | 源数据建表、入库、检查、早期关键词检索 |
-| `backend/pipelines/export_demo_playlist.py` | 固定演示的 JSON、片段和全集媒体导出 |
-| `backend/pipelines/transcribe_openai.py`、`transcribe_local.py` | 转录工具；当前 15 期无需重做 |
-| `backend/pipelines/verify_local_audio.py`、`audit_transcripts.py`、`build_audio_review.py` | 音频 / 字幕检查与核听页 |
-| `backend/pipelines/prepare_expansion.py`、`finalize_corpus.py` | 已完成的 5→15 期素材扩充历史工具 |
+对话、需求、拼盘和播放位置保存在浏览器当前组件内存中。返回首页会重开需求流程，刷新不恢复会话；从全集返回拼盘会恢复之前的位置并暂停。当前没有账户、收藏、播放历史或跨设备同步。
 
-检索未使用逐候选生成式重排：余弦相似度门槛 + 标签规则。组盘在候选中枚举 3–5 段，保持完整章节、总长 600–1800 秒、同一期章节不重叠；以相关性为主并小幅偏好节目多样性和约 20 分钟。细节见 [动态拼盘](dynamic-playlists.md)。
+## 本地维护与发布
 
-## 6. 数据库：10 张表
+本地源库 → 主题章节与索引 → 音频上传 Blob → 导出 SQLite 快照 → Vercel 部署。
 
-| 表 | 行数 | 内容 |
-| --- | ---: | --- |
-| `podcasts` | 4 | 栏目、语言和来源 |
-| `episodes` | 15 | 单集标题、时长、所属栏目和来源页面 |
-| `source_assets` | 45 | 15 音频 + 15 字幕 + 11 章节文件 + 4 转录来源记录；路径、哈希和来源信息 |
-| `transcript_cues` | 4,157 | 精细字幕原文、说话人及起止时间 |
-| `chapters` | 140 | 11 期发布方章节 |
-| `topic_chapters` | 45 | 4 期模型划分且经文本边界复查的主题章节 |
-| `transcript_segments` | 431 | 早期字幕窗口，保留但不作为当前检索单位 |
-| `content_units` | 185 | 统一章节、原文、边界、来源哈希与审核状态 |
-| `content_annotations` | 185 | 摘要、场景、类型、主题 / 帮助 / 形式标签与字幕依据 |
-| `content_embeddings` | 165 | 1,536 维 float32 向量及模型、输入哈希；默认 164 段可独立检索 |
+源内容变化时，离线索引流程负责拒绝过期标注或向量；云端运行校验发布快照，不接触源库。`backend/search_content.py` 与 `backend/playlist_service.py` 保留作本地参考，网页实际检索和组盘逻辑位于 `server/retrieval.ts`。13 个固定场景用于检查两套算法结果的一致性。
 
-SQLite 是普通本地文件，不需要单独的数据库守护进程。源表由 `corpus.py` 管理；主题章节由 `segment_topics.py` 管理；统一单元、标注与向量由 `content_index.py` 管理。单元和标注使用关联字段及 JSON payload；向量为 BLOB，由 Python 遍历计算相似度。
-
-```mermaid
-erDiagram
-    podcasts ||--o{ episodes : contains
-    episodes ||--o{ source_assets : has
-    episodes ||--o{ transcript_cues : has
-    episodes ||--o{ chapters : has
-    episodes ||--o{ topic_chapters : has
-    episodes ||--o{ transcript_segments : has
-    chapters o|--o| content_units : derives
-    topic_chapters o|--o| content_units : derives
-    content_units ||--o| content_annotations : annotates
-    content_units ||--o| content_embeddings : embeds
-```
-
-源字幕或章节变化会使派生索引过期；服务拒绝使用过期向量。重建顺序：源素材入库 → 恢复主题章节 → 统一单元 → 标注 → embedding。原 15 期素材约 16.86 小时，11 期发布方字幕、4 期 API 转录；逐段核听与标注全量语义审核仍未完成。
-
-## 7. 数据保存在哪里
-
-| 数据 | 位置 / 生命周期 |
-| --- | --- |
-| 15 期原音频、字幕、来源文件 | `data/raw/`；Git 忽略；不可当普通缓存删除 |
-| 正式素材清单与词表 | `data/collection.json`、`data/content-taxonomy.json` |
-| 标注及修订导出 | `data/content-annotations.json`、`data/content-annotation-reviews.json` |
-| 原固定演示媒体 | `public/demo-audio/`；Git 忽略 |
-| 动态拼盘媒体 | 直接读取原文件，不重复裁切或写媒体文件 |
-| 用户对话、需求、拼盘、播放进度 | 当前浏览器内存；刷新清空；主动导出可保存 JSON |
-| 网页新查询向量 | 当前请求中使用，不新增磁盘缓存；可复用已有离线缓存 |
-| API 密钥 | `.env.local` 或服务端环境；不发送到浏览器 |
-
-没有用户、会话、播放历史或拼盘持久化表。媒体 URL 只接受已登记 episode ID，并限制真实路径在原音频目录内；支持 Range、HEAD 和实际容器 MIME。
-
-## 8. 当前验证与未完成项
-
-已完成本地缓存需求 → 网页检索请求 → 真实章节拼盘 → 原音频播放的联调，包含章节自动切换、全集返回、MP3 与 MP4/AAC。新对话 / 新查询的 OpenAI 网络验收仍暂停，代理未配置；未做公开部署。推荐权重是启发式初版，不等同于真实用户效果评测。
-
-运行和数据契约见 [动态拼盘](dynamic-playlists.md)；对话结构见 [需求理解](needs-conversation.md)；目录导航见 [文件结构](project-structure.md)。旧 D1 / Drizzle / Supabase 与登录模板已删除，记录见 [清理清单](cleanup-plan.md)。
+运行命令见 [README](../README.md)，部署细节见 [Vercel 部署](vercel-deployment.md)，当前证据与限制见 [测试与验收](testing.md)。
