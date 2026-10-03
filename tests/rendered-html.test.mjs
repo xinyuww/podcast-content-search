@@ -32,8 +32,16 @@ after(() => child?.kill("SIGTERM"));
 test("production HTML retains the night-radio interface", async () => {
   const r = await fetch(origin); assert.equal(r.status, 200);
   const html = await r.text();
-  for (const text of ["声签","调到你的频率","世界很吵。","听点与你有关的。","找到我的声音","试听固定示例拼盘","15 期真实素材"]) assert(html.includes(text), text);
+  for (const text of ["声签","调到你的频率","世界很吵，","听点与你有关的。","找到我的声音","告诉我此刻的困惑，一个问题，一点心情，都可以。","YOUR PERSONAL RADIO","/demo"]) assert(html.includes(text), text);
   assert(!html.includes("test-key"));
+  for (const text of ["15 期真实素材", "从这里开始。", "恢复已保存的需求", "返回上一份拼盘", "我目前的理解"]) assert(!html.includes(text), text);
+});
+test("demo has its own playable page", async () => {
+  const response = await fetch(origin+"/demo");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  for (const text of ["Demo 拼盘", "audio-seek", "播放音频", "拼盘片段列表"]) assert(html.includes(text), text);
+  for (const text of ["为此刻的你。", "从第一段播放", "全部为原播客音频"]) assert(!html.includes(text), text);
 });
 test("production API returns a validated need from the test provider", async () => {
   const r = await fetch(origin+"/api/needs", {method:"POST",headers:{"Content-Type":"application/json",Origin:origin},body:JSON.stringify({messages:[{id:"u1",role:"user",content:"想了解编程"}]})});
