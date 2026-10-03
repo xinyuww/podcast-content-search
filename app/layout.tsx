@@ -1,17 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -19,8 +8,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const isLocal = host.startsWith("localhost") || host.startsWith("127.0.0.1");
   const protocol = requestHeaders.get("x-forwarded-proto") ?? (isLocal ? "http" : "https");
   const origin = `${protocol}://${host}`;
-  const title = "声签｜从好内容里，找到此刻需要的声音";
-  const description = "用一个问题搜索播客中的真实观点，生成属于你的声音拼盘。";
+  const title = "声签｜调到你的频率";
+  const description = "世界很吵。听点与你有关的。告诉我此刻的困惑，把几段值得听的声音，交给接下来的二十分钟。";
 
   return {
     metadataBase: new URL(origin),
@@ -39,11 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

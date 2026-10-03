@@ -1,0 +1,9 @@
+{
+  "model": "gpt-4o-transcribe-diarize",
+  "audio_seconds": 576.951,
+  "elapsed_seconds": 232.295,
+  "segment_count": 56,
+  "episode_id": "bmrs-10edb0637e312e449f67",
+  "status": "one_chunk_transcribed",
+  "listening_review": "pending"
+}

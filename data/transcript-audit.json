@@ -1,0 +1,234 @@
+{
+  "episodes": [
+    {
+      "id": "850f68e6-869e-474f-b149-30443e5f5426",
+      "title": "OPC 的真正难题，是 AI 还没学会替你把东西卖出去",
+      "origin": "publisher_vtt",
+      "cues": 326,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.9788,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 9,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified"
+    },
+    {
+      "id": "184d0cf9-ee51-43de-bb42-9bb5343fc3ed",
+      "title": "我们把 AI 塞进花店后，才知道AI落地有多脏",
+      "origin": "publisher_vtt",
+      "cues": 317,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.9643,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 10,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified"
+    },
+    {
+      "id": "0c8bc813-9648-4d3b-86f9-5a456bb5f6ea",
+      "title": "AI 会写代码了，为什么你还是做不出产品？",
+      "origin": "publisher_vtt",
+      "cues": 400,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.9877,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 8,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified"
+    },
+    {
+      "id": "d30b8af1-3db1-4564-83d3-11b71ce1c038",
+      "title": "开发者需要的是AI助手，还是编程“搭子”？",
+      "origin": "publisher_vtt",
+      "cues": 101,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.9901,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 25,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified"
+    },
+    {
+      "id": "7352287d-abdf-49aa-9e27-89ad99bb4cab",
+      "title": "调研37位程序员后，我不再因为AI而焦虑 feat.脑放电波",
+      "origin": "publisher_vtt",
+      "cues": 155,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.9771,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 36,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified"
+    },
+    {
+      "id": "bmrs-10edb0637e312e449f67",
+      "title": "“卷”出来的那些 10 倍开发者",
+      "origin": "openai_asr",
+      "cues": 378,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.973,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 0,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified",
+      "normalization_records": 7,
+      "unindexed_short_fragments": [
+        {
+          "audio_time_seconds": 1413.522,
+          "text": "还",
+          "reason": "zero_duration_short_fragment_retained_for_review_not_indexed"
+        },
+        {
+          "audio_time_seconds": 2191.306,
+          "text": "干什么",
+          "reason": "zero_duration_short_fragment_retained_for_review_not_indexed"
+        },
+        {
+          "audio_time_seconds": 3436.728,
+          "text": "都",
+          "reason": "zero_duration_short_fragment_retained_for_review_not_indexed"
+        }
+      ],
+      "chunk_edge_gaps": []
+    },
+    {
+      "id": "bmrs-6cd30aed2a5a2c859834",
+      "title": "让我们心平气和地聊聊代码与产品",
+      "origin": "openai_asr",
+      "cues": 358,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.9648,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 0,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified",
+      "normalization_records": 2,
+      "unindexed_short_fragments": [],
+      "chunk_edge_gaps": []
+    },
+    {
+      "id": "bmrs-fd5040f1d5b683096bbb",
+      "title": "面向AI的新编程范式",
+      "origin": "openai_asr",
+      "cues": 310,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.9747,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 0,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified",
+      "normalization_records": 5,
+      "unindexed_short_fragments": [
+        {
+          "audio_time_seconds": 2931.583,
+          "text": "而",
+          "reason": "zero_duration_short_fragment_retained_for_review_not_indexed"
+        }
+      ],
+      "chunk_edge_gaps": []
+    },
+    {
+      "id": "bmrs-7329f152e7b1d4b02738",
+      "title": "从一个播客的诞生，看开源精神的内核",
+      "origin": "openai_asr",
+      "cues": 536,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.9711,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 0,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified",
+      "normalization_records": 3,
+      "unindexed_short_fragments": [],
+      "chunk_edge_gaps": []
+    },
+    {
+      "id": "ccc40feb-a056-4c49-adad-4522c3f07d58",
+      "title": "老板不亲自下场，AI转型大概率只剩一场表演",
+      "origin": "publisher_vtt",
+      "cues": 75,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.9876,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 26,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified"
+    },
+    {
+      "id": "cbcae4ca-9097-4746-9997-1753a7eda405",
+      "title": "已读不回，反问攻击，当代沟通酷刑大赏",
+      "origin": "publisher_vtt",
+      "cues": 431,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.9656,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 3,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified"
+    },
+    {
+      "id": "27b9e4e8-6990-49f7-a62c-120fb8ee5364",
+      "title": "当60后父母抛弃小红书转向AI搜索",
+      "origin": "publisher_vtt",
+      "cues": 132,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.9898,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 33,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified"
+    },
+    {
+      "id": "80bdd49b-4a06-49ac-90e4-54a3485c3565",
+      "title": "学会 AI 就能保住工作，可能是 AI 时代最大的误区｜清华杨斌 × 腾讯陈菊红",
+      "origin": "publisher_vtt",
+      "cues": 137,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.9894,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 62,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified"
+    },
+    {
+      "id": "ac675119-4ba7-49f5-b07a-5e0f14cae928",
+      "title": "期权这张饼，为什么越来越难吃了？",
+      "origin": "publisher_vtt",
+      "cues": 245,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.9793,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 8,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified"
+    },
+    {
+      "id": "0b3c42e8-2363-4ee1-b642-32b548d01d2f",
+      "title": "当机器人学会认路，物理世界才真正接上了 AI",
+      "origin": "publisher_vtt",
+      "cues": 256,
+      "timestamp_range_check": "passed",
+      "speech_timestamp_coverage": 0.9881,
+      "gaps_over_30_seconds": [],
+      "repeated_adjacent_cue_positions": [],
+      "cues_over_60_seconds": 13,
+      "listening_alignment": "not_verified",
+      "transcription_accuracy": "not_verified"
+    }
+  ],
+  "notes": "Gaps may be music or silence; flags require review, not automatic rejection. Timestamp coverage is not recognition accuracy. No human listening verification has been performed."
+}

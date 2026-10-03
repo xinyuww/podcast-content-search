@@ -1,0 +1,10 @@
+{
+  "id": "ai-and-work-v1",
+  "title": "AI 与工作：从焦虑到行动",
+  "items": [
+    {"episodeId": "80bdd49b-4a06-49ac-90e4-54a3485c3565", "chapter": "就业市场的系统性替代", "summary": "从毕业生的就业压力出发，讨论 AI 对岗位与劳动力市场的影响。"},
+    {"episodeId": "7352287d-abdf-49aa-9e27-89ad99bb4cab", "chapter": "调研发现：程序员写代码时间不足20%", "summary": "结合程序员调研，讨论写代码在实际工作中的占比，以及 AI 编程工具能帮助哪些环节。"},
+    {"episodeId": "d30b8af1-3db1-4564-83d3-11b71ce1c038", "chapter": "从辅助编程到激发创造", "summary": "从开发工具的产品实践出发，讨论 AI 如何帮助开发者实现想法。"},
+    {"episodeId": "ccc40feb-a056-4c49-adad-4522c3f07d58", "chapter": "怎么评估AI投入有没有效：先找最小闭环", "summary": "企业引入 AI 后如何判断投入是否有效？从一个具体业务场景开始评估。"}
+  ]
+}

@@ -1,0 +1,5 @@
+# Tested on Intel macOS with Python 3.11 and an existing local base.pt model.
+openai-whisper==20250625
+torch==2.2.2
+numpy==1.26.4
+numba==0.60.0

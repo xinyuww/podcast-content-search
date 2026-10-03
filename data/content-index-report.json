@@ -1,0 +1,50 @@
+{
+  "units": 185,
+  "annotations": 185,
+  "embeddings": 165,
+  "embedding_model": "text-embedding-3-small",
+  "dimensions": 1536,
+  "taxonomy_version": "needs-content-v1",
+  "kinds": {
+    "intro": 14,
+    "content": 161,
+    "mixed": 5,
+    "outro": 4,
+    "advertisement": 1
+  },
+  "standalone_search_candidates": 164,
+  "labels": {
+    "topics": {
+      "technology_trends": 29,
+      "ai_and_work": 82,
+      "product_and_users": 63,
+      "business_practice": 53,
+      "software_development": 42,
+      "culture_and_society": 13,
+      "learning": 19,
+      "workplace_communication": 29,
+      "career_growth": 18,
+      "emotions_and_uncertainty": 21,
+      "management": 13,
+      "compensation": 13,
+      "open_source": 13
+    },
+    "help_types": {
+      "information": 123,
+      "perspective": 92,
+      "decision_support": 20,
+      "practical_guidance": 65,
+      "shared_experience": 30
+    },
+    "formats": {
+      "explanation": 104,
+      "opinion_discussion": 92,
+      "practical_advice": 28,
+      "case_study": 17,
+      "personal_story": 38
+    }
+  },
+  "audio_listening_verified": 0,
+  "annotation_semantic_review": "spot_check_only",
+  "max_embedding_tokens": 5007
+}

@@ -1,0 +1,39 @@
+{
+  "model": "gpt-4o-transcribe-diarize",
+  "status": "transcribed",
+  "complete": true,
+  "workers": 4,
+  "started_at": "2026-09-30T10:51:39.390894+00:00",
+  "total_audio_minutes": 236.95,
+  "chunks_total": 25,
+  "chunks_completed": 25,
+  "completed_audio_seconds": 14217.000000000002,
+  "episodes": [
+    {
+      "id": "bmrs-fd5040f1d5b683096bbb",
+      "title": "面向AI的新编程范式",
+      "segments": 310,
+      "status": "transcribed_listening_pending"
+    },
+    {
+      "id": "bmrs-6cd30aed2a5a2c859834",
+      "title": "让我们心平气和地聊聊代码与产品",
+      "segments": 358,
+      "status": "transcribed_listening_pending"
+    },
+    {
+      "id": "bmrs-10edb0637e312e449f67",
+      "title": "“卷”出来的那些 10 倍开发者",
+      "segments": 378,
+      "status": "transcribed_listening_pending"
+    },
+    {
+      "id": "bmrs-7329f152e7b1d4b02738",
+      "title": "从一个播客的诞生，看开源精神的内核",
+      "segments": 536,
+      "status": "transcribed_listening_pending"
+    }
+  ],
+  "errors": [],
+  "elapsed_seconds": 454.11
+}

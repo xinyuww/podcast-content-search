@@ -1,0 +1,16 @@
+.git
+.env*
+.venv
+.next
+dist
+.wrangler
+.openai
+backend
+data/**
+!data/content-taxonomy.json
+outputs
+work
+tests
+docs
+public/demo-audio
+*.tsbuildinfo

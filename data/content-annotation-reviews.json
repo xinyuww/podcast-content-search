@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "unit_id": "850f68e6-869e-474f-b149-30443e5f5426:chapter:0",
+      "source_hash": "799b1087fa2dedef2ca79cf08b0647ee23952cfb96f05431c651df400779e1af",
+      "original_annotation_hash": "d12c3be22851a2357f9e3a18e96660e84a63c7d5043b16fac516a472fcbf0649",
+      "fields": {
+        "summary": "本章节回顾中国公司注册制度的历史演变，聚焦OPC（即“一人公司”/“one person company”）概念出现的背景、法律责任及其与AI等新兴行业形势的关系。讲述从最初必须多人合伙、高额实缴资本、严苛监管到逐步放开限制与认缴制、个体化、灵活创业政策的发展历程，以及政策调整的核心动因和公司责任界定变化。"
+      },
+      "reason": "原字幕 c0011 同时给出 onepersoncompany，c0034 明确说一人股东；摘要纠正 ASR 同音误写“艺人公司”。不改写源字幕或法律观点。",
+      "evidence_cue_ids": [
+        "c0011",
+        "c0034"
+      ],
+      "reviewer": "codex_text_spot_check"
+    }
+  ]
+}

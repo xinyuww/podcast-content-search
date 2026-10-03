@@ -1,0 +1,67 @@
+{
+  "selected_on": "2026-09-30",
+  "discovery_platform": "小宇宙",
+  "scope": "新增10期，与已有5期合并为15期",
+  "episodes": [
+    {
+      "feed_key": "bmrs",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/episode/65d4ce5c11dfd51b292ebf62",
+      "title": "“卷”出来的那些 10 倍开发者",
+      "topic": "AI与开发效率"
+    },
+    {
+      "feed_key": "bmrs",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/episode/60826662b6d98f0d02ff7c90",
+      "title": "让我们心平气和地聊聊代码与产品",
+      "topic": "产品研发协作"
+    },
+    {
+      "feed_key": "bmrs",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/episode/649321cc40063fe20bbc0a98",
+      "title": "面向AI的新编程范式",
+      "topic": "AI编程实践"
+    },
+    {
+      "feed_key": "bmrs",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/episode/6321f13059e6eb5d21cdb1dd",
+      "title": "从一个播客的诞生，看开源精神的内核",
+      "topic": "开源与团队组织"
+    },
+    {
+      "feed_key": "dao",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/episode/6aa914d4dae90a475b50a29c",
+      "title": "老板不亲自下场，AI转型大概率只剩一场表演",
+      "topic": "AI转型与人才能力"
+    },
+    {
+      "feed_key": "dao",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/episode/68d5851dac8b7214b7bc3599",
+      "title": "已读不回，反问攻击，当代沟通酷刑大赏",
+      "topic": "职场沟通"
+    },
+    {
+      "feed_key": "dao",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/episode/695a76abff95804ed560ba50",
+      "title": "当60后父母抛弃小红书转向AI搜索",
+      "topic": "人机协作与工作方式"
+    },
+    {
+      "feed_key": "sjhybf",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/episode/6a6a2029debc9b0c10f25abf",
+      "title": "学会 AI 就能保住工作，可能是 AI 时代最大的误区｜清华杨斌 × 腾讯陈菊红",
+      "topic": "AI与职业竞争力"
+    },
+    {
+      "feed_key": "ld",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/episode/6a70ae65f11a1da03b2c8a75",
+      "title": "期权这张饼，为什么越来越难吃了？",
+      "topic": "职场激励与职业决策"
+    },
+    {
+      "feed_key": "ld",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/episode/6a8b123f008ed7314d929eca",
+      "title": "当机器人学会认路，物理世界才真正接上了 AI",
+      "topic": "机器人与产业应用"
+    }
+  ]
+}

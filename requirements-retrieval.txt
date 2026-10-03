@@ -1,0 +1,2 @@
+# Python 3.11 recommended. Other retrieval dependencies are Python stdlib.
+tiktoken==0.14.0

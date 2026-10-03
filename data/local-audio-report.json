@@ -1,0 +1,668 @@
+{
+  "checked_at": "2026-09-30T11:00:05.995653+00:00",
+  "episodes": [
+    {
+      "id": "850f68e6-869e-474f-b149-30443e5f5426",
+      "title": "OPC 的真正难题，是 AI 还没学会替你把东西卖出去",
+      "source_audio_url": "https://tk.wavpub.com/WPDL_BRNJKkpdhUBAZVrrSSCJFMYyryQMtFpEBUQBGknHTLGEPTYdMEUnVjRrpT-a3.mp3",
+      "local_path": "data/raw/audio/850f68e6-869e-474f-b149-30443e5f5426.mp3",
+      "bytes": 49320316,
+      "sha256": "c4a0db85cd49654aca7a3d24ed32a27698e17a6df2c15cfcf84d28cbb92d9c8b",
+      "duration_seconds": 4097.750204,
+      "rss_duration_seconds": 4098,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 413.27,
+          "end_seconds": 418.43,
+          "text": "就是你可以叫就是不死缴了，叫认缴注册资本金。",
+          "local_path": "data/raw/auditions/850f68e6-869e-474f-b149-30443e5f5426-early.mp3",
+          "measured_duration_seconds": 5.198367
+        },
+        {
+          "label": "middle",
+          "start_seconds": 2050.65,
+          "end_seconds": 2070.31,
+          "text": "粘贴复制到那个里边，就这一套，反正人嘛都是搬运工。但是唯一的相同点就是都有一个影视圈的导演，嗯，至少一个把控全局坐镇中央啊，才能出精品剧，否则全是水货，那就不能OBC了呀。",
+          "local_path": "data/raw/auditions/850f68e6-869e-474f-b149-30443e5f5426-middle.mp3",
+          "measured_duration_seconds": 19.696327
+        },
+        {
+          "label": "late",
+          "start_seconds": 3724.47,
+          "end_seconds": 3759.69,
+          "text": "你这不合理啊，你是穿越回去的，你直接无脑买比特币不就完了吗？\n那你还得等十年呢。对，那穿越回二零一零就行了。\n我那个有很多的就是他没有什么明确的胜利条件，你只要公司能活下去就行。哦，那不好，但是有很多成就啊，比如说如果你坚持在做中文门户，嗯，你就超过了新浪。可能过一阵儿啊，新浪干别的去了或者倒闭了哦，然后搜狐可能倒闭了。嗯，就是你到最后你你你把他们要干的事，提前先干了，你就可以成为当代巨头。",
+          "local_path": "data/raw/auditions/850f68e6-869e-474f-b149-30443e5f5426-late.mp3",
+          "measured_duration_seconds": 35.265306
+        }
+      ],
+      "transcript_origin": "publisher_vtt",
+      "listening_alignment": "not_verified"
+    },
+    {
+      "id": "184d0cf9-ee51-43de-bb42-9bb5343fc3ed",
+      "title": "我们把 AI 塞进花店后，才知道AI落地有多脏",
+      "source_audio_url": "https://tk.wavpub.com/WPDL_kMjhrEqUVpDWxcjeptqTLztYSmjBSZZnAffJrqzHhjSGUTmMkQgjSWtUkD-9b.mp3",
+      "local_path": "data/raw/audio/184d0cf9-ee51-43de-bb42-9bb5343fc3ed.mp3",
+      "bytes": 50703639,
+      "sha256": "49cd0a555f6e911e71d3b99aa0f8979d054d00a445864325f1ef76d08f2e9a2f",
+      "duration_seconds": 4199.523265,
+      "rss_duration_seconds": 4200,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 469.67,
+          "end_seconds": 499.93,
+          "text": "嗯对那不一样的点，那就多了。就是第一个，这一开始我觉得这个行业我如果想给他降本，第一反应包括ai也告诉我，第一反应是什么？帮助他们降低损耗。你说是花的的爽，对你你啊啊你第一应应是一个生鲜行业业，听着比比较makesense啊，makesense吧。",
+          "local_path": "data/raw/auditions/184d0cf9-ee51-43de-bb42-9bb5343fc3ed-early.mp3",
+          "measured_duration_seconds": 30.302041
+        },
+        {
+          "label": "middle",
+          "start_seconds": 2102.87,
+          "end_seconds": 2130.205,
+          "text": "呃，不行，你听我说，第一个就直接会拒绝的，我就要见成。我要那个东西没有我就退，你就给我退款。嗯，这个大概是个什么三分之一，三分之一是吧？那三分之二都能接受。然后三分之二呢就是哎你就做吧，这个你也不用给我，你就直接送到我家了。这个占多少就是不看图的啊。对，因为他觉得你都给我推荐个更贵的了，我也觉得要图不要图的一半一半啊啊就等于说各三分之一啊，哎差不多这个比例。",
+          "local_path": "data/raw/auditions/184d0cf9-ee51-43de-bb42-9bb5343fc3ed-middle.mp3",
+          "measured_duration_seconds": 27.376327
+        },
+        {
+          "label": "late",
+          "start_seconds": 3784.45,
+          "end_seconds": 3823.27,
+          "text": "我刚才听明白朱峰这个件，其实是你就是亲自去线下花店去问问他。嗯，最近什么流行或者送对女朋友，还有老婆什么花合适，当场做拿走，完事。对，就不要再往上上了了。\n对对对，我我在花店里我是这种感觉，就跟去那个菜市场跟那个水果店似的。嗯，不同季节呢可能花也不一样，哎，每个花也都挺好看的，嗯，也没必要非盯着那个一种可能去到现场。你看哎这个这个这几个花这刚进的特别新鲜，嗯，也好，看你让他打一个小花束也挺好。对嗯，这样就行了，因为你买外卖上点吧，嗯你就想起那么两种来。",
+          "local_path": "data/raw/auditions/184d0cf9-ee51-43de-bb42-9bb5343fc3ed-late.mp3",
+          "measured_duration_seconds": 38.870204
+        }
+      ],
+      "transcript_origin": "publisher_vtt",
+      "listening_alignment": "not_verified"
+    },
+    {
+      "id": "0c8bc813-9648-4d3b-86f9-5a456bb5f6ea",
+      "title": "AI 会写代码了，为什么你还是做不出产品？",
+      "source_audio_url": "https://tk.wavpub.com/WPDL_tUhrWbZpHPqAkKPkdMwhqruGbQYQRqgwUbrGxwQgredXHHZrLpqkdAMmjN-a7.mp3",
+      "local_path": "data/raw/audio/0c8bc813-9648-4d3b-86f9-5a456bb5f6ea.mp3",
+      "bytes": 54930069,
+      "sha256": "9a59c1b484c9ac38baa7b956283d4b8c04bcfde000ab3b603d4a1eba1c0a1171",
+      "duration_seconds": 4559.386122,
+      "rss_duration_seconds": 4559,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 489.81,
+          "end_seconds": 513.075,
+          "text": "因为那些东西是你不对用户负责嘛，你不对用户可以自己用，自己用，对自己负责，坏了也就坏了无所谓。\n对，反正丢自己数据。对，不用非章用户。\n嗯，所以你看我又是写代码的时候，为什么我每次都讽刺某个老师的虾式编程？嗯，就是因为我每次写代码的时候，我都这样会告诉这个ai.我说你用测试驱动开发的理念",
+          "local_path": "data/raw/auditions/0c8bc813-9648-4d3b-86f9-5a456bb5f6ea-early.mp3",
+          "measured_duration_seconds": 23.301224
+        },
+        {
+          "label": "middle",
+          "start_seconds": 2280.49,
+          "end_seconds": 2296.28,
+          "text": "这还是说在有knowhow的情况下，对，那肯定没有knowhow.你就跟说你在哪个领域创业，你不能啥也不知道，你就是个小白，你就能在里边做的很好，就能挣大钱。那也不可能不不可能，是我跟你讲，我再提一个例子，这是一个跨界的例子哈，也也有。",
+          "local_path": "data/raw/auditions/0c8bc813-9648-4d3b-86f9-5a456bb5f6ea-middle.mp3",
+          "measured_duration_seconds": 15.830204
+        },
+        {
+          "label": "late",
+          "start_seconds": 4105.71,
+          "end_seconds": 4134.79,
+          "text": "对，有就是有和，又有时候拼音书法。对对对嘛，所以有不纠正了。但是其实他能知道。\n对，包括比如你没有问号或是个大写的，其实他也知道，你就是知道问问就是问问题。对，嗯嗯，所以这个这AI时代可能会说会把这种简单的事给你，让你那个能。但是你知道你问错了，他不能帮你啊，那也帮不了，这回，或者你压根就不知道怎么问。哎，对，说你压根不知道怎么问这个问题，那这个在我看来说你跟人沟通一样，比如我问朱总，说来帮我就是怎么帮我赚钱。",
+          "local_path": "data/raw/auditions/0c8bc813-9648-4d3b-86f9-5a456bb5f6ea-late.mp3",
+          "measured_duration_seconds": 29.126531
+        }
+      ],
+      "transcript_origin": "publisher_vtt",
+      "listening_alignment": "not_verified"
+    },
+    {
+      "id": "d30b8af1-3db1-4564-83d3-11b71ce1c038",
+      "title": "开发者需要的是AI助手，还是编程“搭子”？",
+      "source_audio_url": "https://tk.wavpub.com/WPDL_AdyDgpJQXknxvggtGxgacbvwqjEyzQnumRDTGfTWZnXyADqZYTDuMHRbLf-ce.mp3",
+      "local_path": "data/raw/audio/d30b8af1-3db1-4564-83d3-11b71ce1c038.mp3",
+      "bytes": 41258069,
+      "sha256": "8386025ee00d093a4f445e9cff8f77f1b64c634f60fa50fd4a4637839f08d7dc",
+      "duration_seconds": 3423.294694,
+      "rss_duration_seconds": 3423,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 353.97,
+          "end_seconds": 391.15,
+          "text": "所以在这个过程里边，我们认为在现在这个阶段，可能最有效的产品方式，或者最能够去服务到我们用户的方式是激发创造。也就是说呃其实我们程序员在日常的工作里面不负责任的讲，可能是一半的时间在思考，至少一半的时间在思考另一半时间是在敲代码，对吧？对，那思考这件事情，我们认为首先目前还没有办法被完全取代。当然你说写代码这件事情可能逐渐逐渐被取代。那思考我们认为说呃，机器是可以让我们更好的去思考的，或者AI可以让我们更好就是到到你的思考过程。",
+          "local_path": "data/raw/auditions/d30b8af1-3db1-4564-83d3-11b71ce1c038-early.mp3",
+          "measured_duration_seconds": 37.22449
+        },
+        {
+          "label": "middle",
+          "start_seconds": 1742.25,
+          "end_seconds": 1803.99,
+          "text": "啊。就是第一呃就像我们一开始去讲的，我们认为大模型它本质上就是预测下一个token,它太适合去在这个场景里边去呃具有快乐。那我觉得这是呃本质上从产品特性上的理解。第二呢就是就像我们去看我们这次活动，包括这也是我们产品的愿景，叫用AI激发创造。你知道自己他我们自己的那个公司的愿景叫激发创造。对，但是他激发创造是激发的，可能是抖音用户最最开始，对吧？或者今日头条当时的用户内容创作者对这种，但实际上我们认为是一致的。就是我们希望包括说你说他们工具类型的产品，我自己定义不叫tod.嗯，我们认为是我们有toprofessional的基因。什么是toprofessional?我觉得今天所有拍抖音有已经非常职业化了，对吧？就已经不不越来越卷了是吧？已经不是一个个人在去拍了，有很多这种对吧？什么MCNI?那我们其实有另一款非常好的产品叫剪映。",
+          "local_path": "data/raw/auditions/d30b8af1-3db1-4564-83d3-11b71ce1c038-middle.mp3",
+          "measured_duration_seconds": 61.779592
+        },
+        {
+          "label": "late",
+          "start_seconds": 3126.63,
+          "end_seconds": 3144.535,
+          "text": "因为但是我觉得所有有价值的新东西诞生一定是伴随着确定的用户场景。我们的用户真的会想要去用啊，有有欲望去用或者说有需求去用。所以我还是非常看好说有有新的形态的东西去产生的对，",
+          "local_path": "data/raw/auditions/d30b8af1-3db1-4564-83d3-11b71ce1c038-late.mp3",
+          "measured_duration_seconds": 17.946122
+        }
+      ],
+      "transcript_origin": "publisher_vtt",
+      "listening_alignment": "not_verified"
+    },
+    {
+      "id": "7352287d-abdf-49aa-9e27-89ad99bb4cab",
+      "title": "调研37位程序员后，我不再因为AI而焦虑 feat.脑放电波",
+      "source_audio_url": "https://tk.wavpub.com/WPDL_QSNEgjrwugHrTLHdGFJhLXhYrnBybchRRWYAJpGVbjBhVcsVuvHugxhLne-7c.mp3",
+      "local_path": "data/raw/audio/7352287d-abdf-49aa-9e27-89ad99bb4cab.mp3",
+      "bytes": 56080188,
+      "sha256": "8426780ed222ea86880a9fe5cc77fbb294532664f87e158d7b906447b683d305",
+      "duration_seconds": 4657.841633,
+      "rss_duration_seconds": 4658,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 517.03,
+          "end_seconds": 519.555,
+          "text": "嗯对，所以实际的使用体验怎么样？",
+          "local_path": "data/raw/auditions/7352287d-abdf-49aa-9e27-89ad99bb4cab-early.mp3",
+          "measured_duration_seconds": 2.56
+        },
+        {
+          "label": "middle",
+          "start_seconds": 2382.17,
+          "end_seconds": 2393.675,
+          "text": "精确的告诉我说，我写代码的时间缩短了百分之三十。所以大概是这样的一个情况，确实跟我们体感不一样啊。所以因为所有人的体感都是觉得说用了这类工具，你就应该更早下班了，对吧？",
+          "local_path": "data/raw/auditions/7352287d-abdf-49aa-9e27-89ad99bb4cab-middle.mp3",
+          "measured_duration_seconds": 11.546122
+        },
+        {
+          "label": "late",
+          "start_seconds": 4230.67,
+          "end_seconds": 4243.275,
+          "text": "但是咱只是瞎猜啊，今天\n那朱峰老师这种瞎猜的意思就是其实就是你们还是更厉害。这个魔法师还是成为了更高阶的魔法师白袍了，我们这帮麻瓜变成黑袍是吧？但是还是要弱一些。",
+          "local_path": "data/raw/auditions/7352287d-abdf-49aa-9e27-89ad99bb4cab-late.mp3",
+          "measured_duration_seconds": 12.643265
+        }
+      ],
+      "transcript_origin": "publisher_vtt",
+      "listening_alignment": "not_verified"
+    },
+    {
+      "id": "bmrs-10edb0637e312e449f67",
+      "title": "“卷”出来的那些 10 倍开发者",
+      "source_audio_url": "https://tk.wavpub.com/WPDL_ZWhZjJatJXJmWGkMnDyNeRTWhEAcEFjvWuTmYrCEyEvvPUYTCAMhmcXKpb-f4.m4a",
+      "local_path": "data/raw/audio/bmrs-10edb0637e312e449f67.mp3",
+      "bytes": 29403893,
+      "sha256": "d840cea38f1335b88571bd6bd3bfce4e084b30827a89908b5812559827846416",
+      "duration_seconds": 3557.862,
+      "rss_duration_seconds": 3558.0,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "aac",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 379.188,
+          "end_seconds": 394.688,
+          "text": "这样呢它都能够从产品和技术结合的角度来构想出一个策略来大家都不一样所以可以分别聊聊自己怎么看待这个十倍程序员这个定义的郎寿先来吧\n嗯就是写书多的人先来啊",
+          "local_path": "data/raw/auditions/bmrs-10edb0637e312e449f67-early.mp3",
+          "measured_duration_seconds": 15.542857
+        },
+        {
+          "label": "middle",
+          "start_seconds": 1785.838,
+          "end_seconds": 1807.392,
+          "text": "美国也一段时间给自己重新做一个估值\n是的我觉得我们大部分工人可能没有这个习惯因为大家\n或者说绝大多数人其实都是厌恶这种不稳定性的\n所以大家没有这个习惯但是在\n2.4年的这个时刻对吧那我觉得可能这个行业的发生的变化大家应该是能够感知到的那我觉得是可以去试一试的",
+          "local_path": "data/raw/auditions/bmrs-10edb0637e312e449f67-middle.mp3",
+          "measured_duration_seconds": 21.603265
+        },
+        {
+          "label": "late",
+          "start_seconds": 3204.682,
+          "end_seconds": 3232.14,
+          "text": "科技领域以内的这些\n看的都是科技圈以内大家看的都是这个top3我只去top3 top3以下我看都不想看\n看如果你的选择变成这个样子那最后大家一定是成全因为top3的吃不了那么多人对但是如果你看得更开一点比如说我们可能就往欧洲的那个方向去看他们每个国家大家都过得很好那类比到国内就是我们有很多不同的行业其他行业还很需要大家去做这些事情我是比较鼓励大家",
+          "local_path": "data/raw/auditions/bmrs-10edb0637e312e449f67-late.mp3",
+          "measured_duration_seconds": 27.506939
+        }
+      ],
+      "transcript_origin": "openai_asr",
+      "listening_alignment": "not_verified"
+    },
+    {
+      "id": "bmrs-6cd30aed2a5a2c859834",
+      "title": "让我们心平气和地聊聊代码与产品",
+      "source_audio_url": "https://tk.wavpub.com/WPDL_fFzujXrdrVmcuLuchyQpqvxQdhkLEHQbNySeJBMvBgJkWWUsqpYujSLACE-c3.m4a",
+      "local_path": "data/raw/audio/bmrs-6cd30aed2a5a2c859834.mp3",
+      "bytes": 28366712,
+      "sha256": "86b6f45d5e8ed0c71f3aa935d888922ae096d55e380a022c74e0065ac20943db",
+      "duration_seconds": 3440.455,
+      "rss_duration_seconds": 3440.0,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "aac",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 344.276,
+          "end_seconds": 371.572,
+          "text": "对\n对立的\n对对对\n对\n对\n云艺说说吧 他吐完你的草 来来来使劲\n我终于知道为什么要毛毛先说了我就一直在对号入座你知道吧然后我就庆幸我不是对毛毛造成伤害的那个人但是我也对其他人造成过伤害然后其实刚才毛毛在说的时候我也在回说就我的三段经历其实有一个共性的点首先它都是2B段的生意或者2B段的产品那其次呢我都经历了从0到1的过程",
+          "local_path": "data/raw/auditions/bmrs-6cd30aed2a5a2c859834-early.mp3",
+          "measured_duration_seconds": 27.324082
+        },
+        {
+          "label": "middle",
+          "start_seconds": 1720.426,
+          "end_seconds": 1745.326,
+          "text": "现代码研究算法其实它并没有达成它自己与真实物理世界的这个连接所以在这个时候你如果想给自己设定一条成长路径的话人这个因素你是永远绕不开的所以这个就对它的这个职业代职业的成长其实带来了很大的一个困扰但是今天我聊的其实产品的话题这个扯得有点远所以咱把话题拉回来啊",
+          "local_path": "data/raw/auditions/bmrs-6cd30aed2a5a2c859834-middle.mp3",
+          "measured_duration_seconds": 24.946939
+        },
+        {
+          "label": "late",
+          "start_seconds": 3101.587,
+          "end_seconds": 3126.987,
+          "text": "你的你说这种没有意义的这个摩擦和内耗倒是我倒觉得没有特别大的必要你一定要争个谁对谁是错吗有的程序员确实是他比较钻牛角角我就要争一个谁对谁错我就要证明我讲的是对但这个但这个问题有用吗在一个具体实现的过程当中在这个产品生命周期的这个场合里面你觉得这个事情有用我倒觉得意义并不是说特别大",
+          "local_path": "data/raw/auditions/bmrs-6cd30aed2a5a2c859834-late.mp3",
+          "measured_duration_seconds": 25.443265
+        }
+      ],
+      "transcript_origin": "openai_asr",
+      "listening_alignment": "not_verified"
+    },
+    {
+      "id": "bmrs-fd5040f1d5b683096bbb",
+      "title": "面向AI的新编程范式",
+      "source_audio_url": "https://tk.wavpub.com/WPDL_bCRzesJmjpnFRQYxZqyvWNFzwPrHWxZqbCbezbZtckcATDyBFLnRRtjrDH-bc.m4a",
+      "local_path": "data/raw/audio/bmrs-fd5040f1d5b683096bbb.mp3",
+      "bytes": 27231753,
+      "sha256": "ddc17230301c925590ea819476c8a8593c9a2fdee92bcc469f96cf9d7d8a2de5",
+      "duration_seconds": 3297.304,
+      "rss_duration_seconds": 3297.0,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "aac",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 345.312,
+          "end_seconds": 372.162,
+          "text": "四美呢\n我这边\n可以说是就是AZ 类相关的工具已经成为我日常工作的一部分了吧尤其是代码这一块就像丁老师刚刚说的一个是Copilot 插件我们之前也在用然后我现在会经常经常写代码朋友也知道就是很多时候你面对一块新的代码的时候你的第一习惯就是你先去找一个要么是自己的代码模板要么就是上网去找一个代码模板 Ctrl C Ctrl V 是开发嘛",
+          "local_path": "data/raw/auditions/bmrs-fd5040f1d5b683096bbb-early.mp3",
+          "measured_duration_seconds": 26.88
+        },
+        {
+          "label": "middle",
+          "start_seconds": 1652.142,
+          "end_seconds": 1674.242,
+          "text": "你会需要做一些相关的元素的开发或者比如说是一个页面的设计写个CSS样式表或者你需要做一些原先可能程序员自己很难完成的事情比如说你可能会需要做一段小的动画或者你需要做一些小的UI的元素但是现在你同样可以让一些多蒙太的模型来帮你完成这些工作",
+          "local_path": "data/raw/auditions/bmrs-fd5040f1d5b683096bbb-middle.mp3",
+          "measured_duration_seconds": 22.151837
+        },
+        {
+          "label": "late",
+          "start_seconds": 2991.231,
+          "end_seconds": 3018.031,
+          "text": "为什么想到写一本面向普通人的这样的一本书呢\n这个问题很好啊我觉得呢首先呢大家不要把AI看成是一个特别抽象特别玄乎的一个事那么这样的话呢可能普通人跟他的这个关联性就会小一些是吧那你如果这样想的话呢普通人从中受益就会更小所以呢我还是包括从我的上一本书AI思维开始呢我就尝试把AI的思维方法那么现在呢AIDC它是一个更加具象的",
+          "local_path": "data/raw/auditions/bmrs-fd5040f1d5b683096bbb-late.mp3",
+          "measured_duration_seconds": 26.827755
+        }
+      ],
+      "transcript_origin": "openai_asr",
+      "listening_alignment": "not_verified"
+    },
+    {
+      "id": "bmrs-7329f152e7b1d4b02738",
+      "title": "从一个播客的诞生，看开源精神的内核",
+      "source_audio_url": "https://tk.wavpub.com/WPDL_uceypwPjYEVkWJRakcZfjmMDppqRRmLBmKqfTrZALyBJPmfJyyxfHbkDpS-e9.m4a",
+      "local_path": "data/raw/audio/bmrs-7329f152e7b1d4b02738.mp3",
+      "bytes": 32447516,
+      "sha256": "b97ce390b729367b9f82c191a40f3e063dcf30a8b506e78222f5abe15831f6dd",
+      "duration_seconds": 3921.761,
+      "rss_duration_seconds": 3922.0,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "aac",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 393.682,
+          "end_seconds": 416.22,
+          "text": "但我觉得很看不好的就是说 它在它的宣传里面讲我要比那个要好得很多\n拉踩\n就这个东西很\n怎么说呢从我觉得从一个软件开发者或者从对开源比较关注的一个人来就是觉得很不好的一方面就是说我们知道Linux Kernel但是我估计绝大部分人都没用过Linux Kernel去做东西啊",
+          "local_path": "data/raw/auditions/bmrs-7329f152e7b1d4b02738-early.mp3",
+          "measured_duration_seconds": 22.569796
+        },
+        {
+          "label": "middle",
+          "start_seconds": 1966.084,
+          "end_seconds": 1999.674,
+          "text": "嗯\n就他讲了\n很早了那个视频\n对讲了一些小的技巧 但是呢他有一些技巧 就是讲的跟现在相比啊就相对简陋 比如说降噪那个处理啊或者是什么怎么样剪辑的一些小的技巧啊\n他讲得太简陋了我看到之后我觉得 我有一天看到了就是我一天找东西正好找到我看到之后小白录得这个有点简单了哪天我有空了我要录一个在他基础之上完整的相当于是更面向新手的教程的更详细一点的就把这个事情倒回来倒回来我们博客月这个事情也是这样子我参加了最初的发起最初几次的讨论整个事情的一开始的串联联动嘛",
+          "local_path": "data/raw/auditions/bmrs-7329f152e7b1d4b02738-middle.mp3",
+          "measured_duration_seconds": 33.619592
+        },
+        {
+          "label": "late",
+          "start_seconds": 3543.957,
+          "end_seconds": 3570.757,
+          "text": "他的创造力他的观点\n是的 我一直想推广的这个开源这个源不是说跟这个 source code源代码去对应它就是就是源我把它理解成就是源头活水的源\n哦这个很有道理哦\n就比如说你是做博客那么我的源可能就是嘉宾主持人然后你的制作的方法工艺这是你的一个也可以叫做方法论吧然后如果你去炒菜",
+          "local_path": "data/raw/auditions/bmrs-7329f152e7b1d4b02738-late.mp3",
+          "measured_duration_seconds": 26.827755
+        }
+      ],
+      "transcript_origin": "openai_asr",
+      "listening_alignment": "not_verified"
+    },
+    {
+      "id": "ccc40feb-a056-4c49-adad-4522c3f07d58",
+      "title": "老板不亲自下场，AI转型大概率只剩一场表演",
+      "source_audio_url": "https://tk.wavpub.com/WPTK_Oubz7gIlaulVFWw8.mp3",
+      "local_path": "data/raw/audio/ccc40feb-a056-4c49-adad-4522c3f07d58.mp3",
+      "bytes": 35895526,
+      "sha256": "0c2006eccd40729c1cefe4f74e4e0f8a8e59e656fc3cdcb83cb49b5c6dcc87bb",
+      "duration_seconds": 2983.209796,
+      "rss_duration_seconds": 2983.0,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 299.71,
+          "end_seconds": 301.43,
+          "text": "您觉得这里面什么是最难的？",
+          "local_path": "data/raw/auditions/ccc40feb-a056-4c49-adad-4522c3f07d58-early.mp3",
+          "measured_duration_seconds": 1.750204
+        },
+        {
+          "label": "middle",
+          "start_seconds": 1494.37,
+          "end_seconds": 1555.51,
+          "text": "啊。但这个工作其实第一个是必须要做。第二个是这个工作，其实它的价值是非常大的。就是可能你做一人天未来AI其实能给你提升一百倍的人效。啊，就我觉得就是第一个是大家可能上来都有畏难情绪。第二个就是因为视野的问题，其实对当下的这种困难没有一个更好的方法能迈过去啊，但是大家是愿意去做的啊，个别人不愿意的话，那就换人。但是就是愿意做的人可能需要带给他一些新的思想。那所以从这个我得出觉得就是创始人或一号位必须能亲自下场，他去一个一个去识别问题，并且找到更好的方法。我觉得就是呃定位问题就是我一定能找到解决问题的方案。就其实我并没有那个解决问题的能力。但是因为其实外部有更多的专家，我把问题抛给他，其实就会能得到很好的思路，然后我们去找到好的思路传递给大家。所以最近我们就其其实已经开始就考试星现有的知识去重构了。",
+          "local_path": "data/raw/auditions/ccc40feb-a056-4c49-adad-4522c3f07d58-middle.mp3",
+          "measured_duration_seconds": 61.178776
+        },
+        {
+          "label": "late",
+          "start_seconds": 2738.97,
+          "end_seconds": 2772.77,
+          "text": "哎，这样的话我觉得就在可以在真实的工作场景中去还原识别它的能力。因为现在这个在业时代简历都是过度包装，甚至是作品也都可以流水化的生产啊，包括白老师说的，其实字节这种大厂永远不缺简历，然后都是非常华丽简简历。那HR最难的是说，如何从都非常好的，看似都非常合适的候选人，识别出真正有能力很匹配的人。对我们其实现在在在去帮创业者或者说成长型的AI企业去去做这件事啊，然后从c端角度，我觉得王总会更有经验。",
+          "local_path": "data/raw/auditions/ccc40feb-a056-4c49-adad-4522c3f07d58-late.mp3",
+          "measured_duration_seconds": 33.828571
+        }
+      ],
+      "transcript_origin": "publisher_vtt",
+      "listening_alignment": "not_verified"
+    },
+    {
+      "id": "cbcae4ca-9097-4746-9997-1753a7eda405",
+      "title": "已读不回，反问攻击，当代沟通酷刑大赏",
+      "source_audio_url": "https://tk.wavpub.com/WPDL_wpWhpcJBAtPtueaVQJvUgBCUjVCqJLWbyfsHYtKDatbTNWejkbEujssPQC-dd.mp3",
+      "local_path": "data/raw/audio/cbcae4ca-9097-4746-9997-1753a7eda405.mp3",
+      "bytes": 51882226,
+      "sha256": "42448b1fbc410e87b80c051dc76f96797e14037cbfe5746a42674d6c67546668",
+      "duration_seconds": 4302.680816,
+      "rss_duration_seconds": 4303.0,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 475.05,
+          "end_seconds": 495.47,
+          "text": "为什么要办事呢？\n这是一个很好的讨论的方式啊。\n是，但是你看就但是了，但是找一个口头语就还好。\n我我我我挺想避免这种口头语。我我先不要以那个就是反驳别人为为前提来抛出我的观点。\n这个可能是我以后想你先肯定再反驳，对玉扬寓寓意心阳。",
+          "local_path": "data/raw/auditions/cbcae4ca-9097-4746-9997-1753a7eda405-early.mp3",
+          "measured_duration_seconds": 20.453878
+        },
+        {
+          "label": "middle",
+          "start_seconds": 2152.33,
+          "end_seconds": 2169.97,
+          "text": "你拿我当什么？对，就是那你要是没空弄手机另说，而且那水群。\n哎，对还不是说大家一定要注意，如果你当时没有回某某些人的信息，你那个时候不要发表朋友圈及在群里回复其他人信息，他会看到的对，而且你们俩还在一个群。对，是的，这个真的很尴尬。",
+          "local_path": "data/raw/auditions/cbcae4ca-9097-4746-9997-1753a7eda405-middle.mp3",
+          "measured_duration_seconds": 17.684898
+        },
+        {
+          "label": "late",
+          "start_seconds": 3881.21,
+          "end_seconds": 3900.265,
+          "text": "这个其实是我还是个礼物，还是个艺术节。\n台台面上puteverythinginthetable,onthetable讨厌就是回到了什么啊美什么什么\n陷阱。Sd案子啊，东东强老师，那个\n宇宙镜镜头是天天的来似goodbag,类似goodbag.",
+          "local_path": "data/raw/auditions/cbcae4ca-9097-4746-9997-1753a7eda405-late.mp3",
+          "measured_duration_seconds": 19.09551
+        }
+      ],
+      "transcript_origin": "publisher_vtt",
+      "listening_alignment": "not_verified"
+    },
+    {
+      "id": "27b9e4e8-6990-49f7-a62c-120fb8ee5364",
+      "title": "当60后父母抛弃小红书转向AI搜索",
+      "source_audio_url": "https://tk.wavpub.com/WPDL_myKMBzTMwVZGfDDWYmRYrFmzckHrRxYaejHGEKRSQRdxHvvEcEcjnKcDBf-f4.mp3",
+      "local_path": "data/raw/audio/27b9e4e8-6990-49f7-a62c-120fb8ee5364.mp3",
+      "bytes": 49289653,
+      "sha256": "d627e1274db6180d7ef38fa126a6e569034009630360463c8ddf3fbcab07ef19",
+      "duration_seconds": 4098.272653,
+      "rss_duration_seconds": 4098.0,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 422.67,
+          "end_seconds": 480.21,
+          "text": "从封面图到标题到shownote没有一件东西，现在人人干的了。已经对舒琦老师可能作为我们的这个运营同学，他可能更多的就是把AI生成封面图改改格式，然后加个logo,这些事情可能AI会干偏不如人干快。嗯嗯，他就稍微套一个photoshop的那个模板就行了，基本就是干这些事情。从内容创作的角度，一会儿你们两个人可以也可以聊啊，其实大大的减轻了中期的压力。我觉得可能从内容创作后期还有一个东西，特别重要的就是社群运营。那这个AI替代不了，你还是要去用人来解决的那需要温度，但还是需要温度的，这个没有办法，那必须啊，舒琦老师还要充当新小助手，在群里跟大家聊天。这个没有办法，这个AI没法写一个那个AI版的舒籍老师，对吧？对，这个很难。所以现在我们是这个状态。那李军说说你吧，因为你作为一个你们也做节目，也做关注这个AI和教育这一块。对，然后你也可以说说你这边的现在一个弄法啊，",
+          "local_path": "data/raw/auditions/27b9e4e8-6990-49f7-a62c-120fb8ee5364-early.mp3",
+          "measured_duration_seconds": 57.573878
+        },
+        {
+          "label": "middle",
+          "start_seconds": 2059.91,
+          "end_seconds": 2075.53,
+          "text": "但是他依然有一个问题，就是我总会觉得我在使用ai的过程当中，我的主主体性在丧失。嗯，我在跟着他做事情，而不是他为我服务。我不知道你们有没有这感受。",
+          "local_path": "data/raw/auditions/27b9e4e8-6990-49f7-a62c-120fb8ee5364-middle.mp3",
+          "measured_duration_seconds": 15.647347
+        },
+        {
+          "label": "late",
+          "start_seconds": 3693.57,
+          "end_seconds": 3748.89,
+          "text": "但如果说他并不是所有的AI信息都要从手机传递，而是在这个世界的。比如说我我们生活当中更多的地方能够出现这些信息源。其实我觉得他可能对我来说会有一些呃生活方式的一些转变，这个我还挺期待的对，然后另外就是对我自己的期待吧。我现在有点觉得就是AIAI,我现在对他渐渐的就是就是怎么说，我我担心我会变成越来越懒，越来越急于求成的那个人我现在会越来越多的发现，为什么我每次都要写这么多的提示词，给你说这么改这么多遍的那个事情，你才能给我做到。呃，有的时候会想什么时候脑脑急解口就能够来的。就是现在。所以我会对我自己会有一个期待，就是就在这过程当中还是不要太着着急，就还是要在这过程当中多锻炼锻炼炼己己的脑子，然后去拥抱这个变化的世界。",
+          "local_path": "data/raw/auditions/27b9e4e8-6990-49f7-a62c-120fb8ee5364-late.mp3",
+          "measured_duration_seconds": 55.353469
+        }
+      ],
+      "transcript_origin": "publisher_vtt",
+      "listening_alignment": "not_verified"
+    },
+    {
+      "id": "80bdd49b-4a06-49ac-90e4-54a3485c3565",
+      "title": "学会 AI 就能保住工作，可能是 AI 时代最大的误区｜清华杨斌 × 腾讯陈菊红",
+      "source_audio_url": "https://tk.wavpub.com/WPDL_xmzExzCpJrjYdRuyjmqFueXXNXMkbymhStnGWHhtLhJJZULJyGnCAPYMYh-03.m4a",
+      "local_path": "data/raw/audio/80bdd49b-4a06-49ac-90e4-54a3485c3565.mp3",
+      "bytes": 48779307,
+      "sha256": "9cda4d762c84888a1b1243be33baca74385e2d906748ffcbe1062fcc548f5216",
+      "duration_seconds": 5914.409,
+      "rss_duration_seconds": 5914.0,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "aac",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 667.81,
+          "end_seconds": 742.845,
+          "text": "有时候会让我感觉这可能还很多。是拿ai来说事儿还不是真正有ai带来。呃在一两年之后，大家都会有一种非常强的确定性，就是呃AI会对现在的整个劳动力结构劳动力市场是一个呃系统性的影响。那这里头我特别我想把有一个也可以叫叫商税哈。你说出来就是有的人会觉得说说那些懂ai的或者会ai的，要比那些不懂ai不会i的，可能将来他的工作更有保障是吧？其实我我觉得这种看法呃只是是一个误区了啊，这一次ai对于就业市场可能会产生的这样一种叫有一些呃替代的话，它不是在人群当中根据不同人的能力分布，然后进行挑拣。不是，它是系统性的，会你可以叫消灭啊，或者说使得某一些工作完全由原来人作为工作主体啊，变成是由呃AI以及AI基础上的一些系统来做更稳定呃，交付的成果质量更高。",
+          "local_path": "data/raw/auditions/80bdd49b-4a06-49ac-90e4-54a3485c3565-early.mp3",
+          "measured_duration_seconds": 75.075918
+        },
+        {
+          "label": "middle",
+          "start_seconds": 2973.59,
+          "end_seconds": 3041.13,
+          "text": "我在想刚才提到产业的时候，其实诗里头说啊春江水暖鸭先知产业。为什么今天创新公司可以这样做？他有他巨大的动力在里面，对吗？他能看到这个带来的商业的可能性和改变。所以你会发现这样的公司在做他的组织变革，我用高中生嗯都是因为压先知。那这个巨大的推力一定会在波浪上面影响到大学教育，影响到中学教育，影响到更小的对人的教育。就有一点是始料未及的。就是其实我们的老祖宗说我因材施教，对吧？多么有意思。嗯，因为这样一个智能在很多年以后带来了某种不一样的可能，这是多么有趣的一件事情呢。那好，假设公司里头的压先知和变革和未来发展，不管是利润还是发展上的巨大的动力，可以去做这样的尝试的话。",
+          "local_path": "data/raw/auditions/80bdd49b-4a06-49ac-90e4-54a3485c3565-middle.mp3",
+          "measured_duration_seconds": 67.578776
+        },
+        {
+          "label": "late",
+          "start_seconds": 5334.63,
+          "end_seconds": 5401.47,
+          "text": "而呃其他的这些帮助制作模型变得更有威力的行为，却没有从中得到应有的所得。啊，就这些问题，我觉得今年的下半年在接下来的日子中会会更加尖锐起来。而另外一个问题，其实人如何放置自己安置自己的这个问题代劳是一个一直在发生的事情。但是哪部分的劳体力的劳也也其实造成了我们某些四体不勤的这种情况啊，只不过这种东西它和人的本质性，呃，相对来说你会不那么觉得威胁到人还有是不是人。但是当代劳变成代我们那个意识思考，决定选择判断这些东西的时候，其实我觉得这是动了很重要的那个本了，人之本了啊，所以当五零年的时候，维纳写下的那本叫humanuseofhumanbeing是吧？",
+          "local_path": "data/raw/auditions/80bdd49b-4a06-49ac-90e4-54a3485c3565-late.mp3",
+          "measured_duration_seconds": 66.873469
+        }
+      ],
+      "transcript_origin": "publisher_vtt",
+      "listening_alignment": "not_verified"
+    },
+    {
+      "id": "ac675119-4ba7-49f5-b07a-5e0f14cae928",
+      "title": "期权这张饼，为什么越来越难吃了？",
+      "source_audio_url": "https://tk.wavpub.com/WPDL_FTEkyTDVpVDFhzSpvJQQZDxYmfxVvMxBbDqmcvMWaPhEMvpgbShXpwZvGP-52.mp3",
+      "local_path": "data/raw/audio/ac675119-4ba7-49f5-b07a-5e0f14cae928.mp3",
+      "bytes": 41532724,
+      "sha256": "9f1724a1e162d12031757b58acb20dbae921d37ef25130cb91389485f1da6339",
+      "duration_seconds": 3440.979592,
+      "rss_duration_seconds": 3441.0,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 363.43,
+          "end_seconds": 380.11,
+          "text": "你是说土豆豆师吗？\n还真的这得解释一下是是土豆网。\n中国第一个视频网优酷土豆土豆dotacom对优酷土豆是吧？\n后来优土是合并了，后来他就上市，就是就市值各方面，他就错过那个机会了嘛，所以抽出出卖了优酷了。",
+          "local_path": "data/raw/auditions/ac675119-4ba7-49f5-b07a-5e0f14cae928-early.mp3",
+          "measured_duration_seconds": 16.718367
+        },
+        {
+          "label": "middle",
+          "start_seconds": 1726.37,
+          "end_seconds": 1754.23,
+          "text": "对，嗯，就是这个时候就考验人性了。但是这个公司不挣钱的时候啊，大家都好玩。这个百分之十五杠概面不是也就值十万块钱。\n我跟你们讲啊，这个广大听友啊不要觉得是我们这个中国人把这个事儿玩坏了啊。我给你们讲美国人，这是你讲美国人发明的，你讲美国的案例啊比咱好玩多了。嗯，第一个是谁呢？叫金港啊，游戏公司。嗯，对呃，你们你们有没不玩哈？",
+          "local_path": "data/raw/auditions/ac675119-4ba7-49f5-b07a-5e0f14cae928-middle.mp3",
+          "measured_duration_seconds": 27.898776
+        },
+        {
+          "label": "late",
+          "start_seconds": 3114.81,
+          "end_seconds": 3137.79,
+          "text": "对，就是你的，跟你一块竞争的也那也少了。\n嗯，你看现在你说被大厂裁员的人，他也没有创业公司可去嗯，他只能去找下一个大厂中厂，对吧？对，那只能说还不如原来呢。\n嗯，但是因为下星期嘛，你不就不能拿下上上星期去看下星期的那些就是拿上星期那些优点去看下星期的缺点，因为这是两码事了。",
+          "local_path": "data/raw/auditions/ac675119-4ba7-49f5-b07a-5e0f14cae928-late.mp3",
+          "measured_duration_seconds": 23.013878
+        }
+      ],
+      "transcript_origin": "publisher_vtt",
+      "listening_alignment": "not_verified"
+    },
+    {
+      "id": "0b3c42e8-2363-4ee1-b642-32b548d01d2f",
+      "title": "当机器人学会认路，物理世界才真正接上了 AI",
+      "source_audio_url": "https://tk.wavpub.com/WPTK_Hx8KT5WCDNDoJTOu-28600a8802e2.mp3",
+      "local_path": "data/raw/audio/0b3c42e8-2363-4ee1-b642-32b548d01d2f.mp3",
+      "bytes": 57767948,
+      "sha256": "9652c2b260070fa1b56715c4ad01fcdb0812dea840df680a53cb17de37f341b9",
+      "duration_seconds": 4796.029388,
+      "rss_duration_seconds": 4796.0,
+      "full_decode": "passed",
+      "audio_format": {
+        "codec_name": "mp3",
+        "sample_rate": "44100",
+        "channels": 2
+      },
+      "auditions": [
+        {
+          "label": "early",
+          "start_seconds": 494.79,
+          "end_seconds": 553.555,
+          "text": "对，PLC和单片机还不一样。Plc是属于那个大型的那种这种相对来说复杂一点的工控的这种设备。那回过头来讲，就是说后来呢从这个人人机器人开始，但那个时候一直是个概念。因为人形跟工业不一样，因为它最大不同在于人性，它的自由度更多，我们称之为自由度啊，是机器人当中一个十分关键的一个概念。嗯，呃什么叫自由度？就是说假设我们说的这个空间当中有六个维度叫前后左右上下，然后三个旋转嗯XYZ,然后绕这三根轴度，这就是所有的自由度。这就是这这叫一个这叫六个自由度，某一个单点。但是呢当你把这个东西就锁起来以后，一个关节它一般就只有一个自由度，一般就只有一个自由度。您可以想象一下，你的手指的它某某一个环节，对它就它只能够要不你说你说单杆节，它只能够绕着这一根轴做旋转，嗯，要一个自由度。那么对于这个像工业机器人来说，它一般是六个自由度，或者说是七个自由度。呃，但是人形不一样，人形它是仿人的，它可能有四十多个角度。",
+          "local_path": "data/raw/auditions/0b3c42e8-2363-4ee1-b642-32b548d01d2f-early.mp3",
+          "measured_duration_seconds": 58.801633
+        },
+        {
+          "label": "middle",
+          "start_seconds": 2442.97,
+          "end_seconds": 2503.875,
+          "text": "就是导盲。这个场景他跟我说完之后，马上就能get到。为什么我们之前做过那个残疾人日的节目，然后我们请来的就是一个盲人嘛，他就牵着一个导盲犬来的。当时然后这条狗啊真的挺聪明的。说实话就是前面啊有什么障碍，或者哎这个门儿有多宽，他都能够给这个盲人示意的非常好。那就比如说这门比较窄，那个狗就会站在这个门的一边帮它把着点，然后它能够走进去。然后呢，哎怎么拐弯怎么走？这个狗基本上他我问过这个盲人，我说这个熟悉的场景，它自然醒，对吧？那对于不熟悉的场景，他怎么能判断到你能进哪个门呢？他说这个是需要说靠人去领着，但是他能够给我起到一个指示的作用。比如这个门多宽多窄啊等等，它能起到这个作用。如果熟悉的场景，那个狗自己就带着我走了。这个对于他们来讲是特别特别有用的一个能力。就是这个狗是当他的眼睛，",
+          "local_path": "data/raw/auditions/0b3c42e8-2363-4ee1-b642-32b548d01d2f-middle.mp3",
+          "measured_duration_seconds": 60.943673
+        },
+        {
+          "label": "late",
+          "start_seconds": 4344.35,
+          "end_seconds": 4358.47,
+          "text": "这就和那些anthropy和这个openAI一样。\n看这个嘛。\n对啊，他其实这个收集了大量的使用数据。\n对，你以为在白嫖，实际你是人家的耗材没有错，没错。",
+          "local_path": "data/raw/auditions/0b3c42e8-2363-4ee1-b642-32b548d01d2f-late.mp3",
+          "measured_duration_seconds": 14.158367
+        }
+      ],
+      "transcript_origin": "publisher_vtt",
+      "listening_alignment": "not_verified"
+    }
+  ],
+  "total_bytes": 654889539,
+  "browser_playback": "not_verified",
+  "notes": "Full decode and source-timestamp clip extraction passed. Early/middle/late auditions use original audio, never synthesized speech. Text/audio alignment and recognition accuracy still require listening."
+}

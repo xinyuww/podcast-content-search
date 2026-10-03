@@ -40,3 +40,12 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /work/
+
+# Local source cache and database; rebuild using data/collection.json.
+/data/raw/
+/data/*.sqlite*
+__pycache__/
+*.py[cod]
+/.venv/
+/public/demo-audio/
+*.tsbuildinfo

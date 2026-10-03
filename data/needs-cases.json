@@ -1,0 +1,15 @@
+{
+  "note": "开发者编写的合成对话验收场景；不是用户数据，也不是盲测准确率。",
+  "cases": [
+    {"id":"clarify_then_correct","turns":[
+      {"text":"工作好累。","ready":false,"absent":{"avoid_help_types":["practical_guidance"],"avoid_formats":["practical_advice"]}},
+      {"text":"最近总加班，我想先听听有类似经历的人怎么过来的，不需要解决方法。","ready":true,"includes":{"help_types":["shared_experience"],"avoid_help_types":["practical_guidance"]}},
+      {"text":"改一下，我现在想听具体的沟通方法，暂时不想听个人故事。","ready":true,"includes":{"help_types":["practical_guidance"],"avoid_formats":["personal_story"]},"absent":{"help_types":["shared_experience"],"avoid_help_types":["practical_guidance"]}}
+    ]},
+    {"id":"clear_practice","turns":[{"text":"我是程序员，想了解AI编程工具在团队里实际怎么用，给我一些具体做法。","ready":true,"includes":{"help_types":["practical_guidance"],"topics":["ai_and_work"]},"no_avoid":true}]},
+    {"id":"decision","turns":[{"text":"我有两个工作offer，一个大公司工资更高，一个创业公司给期权。我想听听怎么比较风险和收益，帮助我做选择。","ready":true,"includes":{"help_types":["decision_support"],"topics":["compensation"]},"no_avoid":true}]},
+    {"id":"explicit_emotional_support","turns":[{"text":"最近被裁员了，我现在不想听找工作的建议，只想听一些安慰和接纳失落情绪的内容，让我少一点自责。","ready":true,"includes":{"help_types":["emotional_support"],"avoid_help_types":["practical_guidance"]}}]},
+    {"id":"preference_is_not_exclusion","turns":[{"text":"我在考虑换工作，更想听过来人的经历。","ready":true,"includes":{"help_types":["shared_experience"],"formats":["personal_story"]},"no_avoid":true}]},
+    {"id":"respect_no_more_questions","turns":[{"text":"最近对职业发展有点迷茫，不想细聊，听一些不同的思路就好。","ready":true,"includes":{"help_types":["perspective"]},"no_avoid":true}]}
+  ]
+}

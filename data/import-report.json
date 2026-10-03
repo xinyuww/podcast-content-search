@@ -1,0 +1,111 @@
+{
+  "podcasts": 4,
+  "episodes": 15,
+  "chapters": 140,
+  "transcript_cues": 4157,
+  "transcript_segments": 431,
+  "audio_hours": 16.86,
+  "verified_by_listening": 0,
+  "transcript_origins": {
+    "openai_asr_imported": 4,
+    "publisher_vtt_imported": 11
+  },
+  "local_audio_files": 15,
+  "topic_chapters": 45,
+  "content_units": 185,
+  "content_annotations": 185,
+  "content_embeddings": 165,
+  "embeddings_generated": true,
+  "episodes_detail": [
+    {
+      "id": "bmrs-6cd30aed2a5a2c859834",
+      "title": "让我们心平气和地聊聊代码与产品",
+      "duration_seconds": 3440.0,
+      "segments": 20
+    },
+    {
+      "id": "bmrs-7329f152e7b1d4b02738",
+      "title": "从一个播客的诞生，看开源精神的内核",
+      "duration_seconds": 3922.0,
+      "segments": 23
+    },
+    {
+      "id": "bmrs-fd5040f1d5b683096bbb",
+      "title": "面向AI的新编程范式",
+      "duration_seconds": 3297.0,
+      "segments": 20
+    },
+    {
+      "id": "7352287d-abdf-49aa-9e27-89ad99bb4cab",
+      "title": "调研37位程序员后，我不再因为AI而焦虑 feat.脑放电波",
+      "duration_seconds": 4658.0,
+      "segments": 33
+    },
+    {
+      "id": "bmrs-10edb0637e312e449f67",
+      "title": "“卷”出来的那些 10 倍开发者",
+      "duration_seconds": 3558.0,
+      "segments": 21
+    },
+    {
+      "id": "d30b8af1-3db1-4564-83d3-11b71ce1c038",
+      "title": "开发者需要的是AI助手，还是编程“搭子”？",
+      "duration_seconds": 3423.0,
+      "segments": 28
+    },
+    {
+      "id": "cbcae4ca-9097-4746-9997-1753a7eda405",
+      "title": "已读不回，反问攻击，当代沟通酷刑大赏",
+      "duration_seconds": 4303.0,
+      "segments": 33
+    },
+    {
+      "id": "27b9e4e8-6990-49f7-a62c-120fb8ee5364",
+      "title": "当60后父母抛弃小红书转向AI搜索",
+      "duration_seconds": 4098.0,
+      "segments": 32
+    },
+    {
+      "id": "0c8bc813-9648-4d3b-86f9-5a456bb5f6ea",
+      "title": "AI 会写代码了，为什么你还是做不出产品？",
+      "duration_seconds": 4559.0,
+      "segments": 33
+    },
+    {
+      "id": "184d0cf9-ee51-43de-bb42-9bb5343fc3ed",
+      "title": "我们把 AI 塞进花店后，才知道AI落地有多脏",
+      "duration_seconds": 4200.0,
+      "segments": 30
+    },
+    {
+      "id": "850f68e6-869e-474f-b149-30443e5f5426",
+      "title": "OPC 的真正难题，是 AI 还没学会替你把东西卖出去",
+      "duration_seconds": 4098.0,
+      "segments": 30
+    },
+    {
+      "id": "80bdd49b-4a06-49ac-90e4-54a3485c3565",
+      "title": "学会 AI 就能保住工作，可能是 AI 时代最大的误区｜清华杨斌 × 腾讯陈菊红",
+      "duration_seconds": 5914.0,
+      "segments": 43
+    },
+    {
+      "id": "ac675119-4ba7-49f5-b07a-5e0f14cae928",
+      "title": "期权这张饼，为什么越来越难吃了？",
+      "duration_seconds": 3441.0,
+      "segments": 25
+    },
+    {
+      "id": "0b3c42e8-2363-4ee1-b642-32b548d01d2f",
+      "title": "当机器人学会认路，物理世界才真正接上了 AI",
+      "duration_seconds": 4796.0,
+      "segments": 34
+    },
+    {
+      "id": "ccc40feb-a056-4c49-adad-4522c3f07d58",
+      "title": "老板不亲自下场，AI转型大概率只剩一场表演",
+      "duration_seconds": 2983.0,
+      "segments": 26
+    }
+  ]
+}

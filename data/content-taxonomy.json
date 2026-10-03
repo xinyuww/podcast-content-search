@@ -1,0 +1,40 @@
+{
+  "version": "needs-content-v1",
+  "topics": {
+    "ai_and_work": "AI 对工作、职业和组织的影响",
+    "software_development": "编程、工程能力和开发实践",
+    "career_growth": "职业成长、求职、能力与路径选择",
+    "workplace_communication": "职场沟通、协作和冲突",
+    "product_and_users": "产品设计、用户需求和体验",
+    "business_practice": "商业落地、创业、销售与经营实践",
+    "management": "团队、组织管理和领导方式",
+    "learning": "学习方法、技能积累与知识理解",
+    "open_source": "开源、社区与开放协作",
+    "technology_trends": "技术发展和产业趋势",
+    "compensation": "薪酬、期权和激励",
+    "emotions_and_uncertainty": "工作中的情绪、自我怀疑和不确定感",
+    "culture_and_society": "文化、代际观念和社会现象"
+  },
+  "help_types": {
+    "information": "提供事实、概念解释、现状或行业信息",
+    "practical_guidance": "提供明确做法、实践步骤或可操作经验",
+    "decision_support": "比较选项、利弊、适用条件或判断标准",
+    "perspective": "提供另一种理解问题的视角或反思框架",
+    "shared_experience": "真实讲述相关亲身经历、困境及变化；不是泛泛举例",
+    "emotional_support": "明确承认或接纳困境与感受，提供安慰或减少自责；不能仅凭出现焦虑一词推断"
+  },
+  "formats": {
+    "personal_story": "有具体背景、经过或感受的第一人称经历",
+    "practical_advice": "围绕如何做的建议、步骤或经验方法",
+    "case_study": "对具体项目、团队或商业实践的案例分析",
+    "explanation": "解释概念、机制、事实或现状",
+    "opinion_discussion": "交换看法、争论、比较和反思"
+  },
+  "rules": {
+    "multi_label": true,
+    "evidence_required": true,
+    "unknown_allowed": "证据不足时标签数组可为空，不为凑齐维度编造标签",
+    "emotion_note": "帮助类型只是内容潜力，不保证用户的实际情绪效果，也不从文字推断声线与语气。",
+    "query_note": "用户明确表达的偏好优先于推测；未来对话需求使用相同枚举。"
+  }
+}

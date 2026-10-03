@@ -1,0 +1,10 @@
+[
+  {
+    "chapter_position": 11,
+    "field": "end_cue_id",
+    "from": "c0351",
+    "to": "c0355",
+    "reason": "核对原字幕：遗漏的 c0352–c0355 为感谢嘉宾、谢谢及下期再见，属于本期内容总结与结束语；下一章广告仍从 c0356 开始。补齐覆盖，不改写原文或推测时间。",
+    "reviewed_by": "codex_transcript_review"
+  }
+]

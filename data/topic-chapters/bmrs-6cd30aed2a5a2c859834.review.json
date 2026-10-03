@@ -1,0 +1,103 @@
+{
+  "model_result_sha256": "a062eeba7f88069cd82a0b0b100db0632e6dcd8160143fdcd5fd40b4df3c52f8",
+  "reviewer": "codex_transcript_boundary_review",
+  "reviewed_at": "2026-10-01T04:21:19.927895+00:00",
+  "notes": [
+    "将双方吐槽放入同一段，避免第二位嘉宾的回答缺少前文；合并相连的矛盾根源与沟通讨论。",
+    "原 c0165/c0166 边界切断了一个笑话，调整到完整回应结束后的 c0171/c0172。",
+    "重新对齐岗位细分与跨界沟通边界；栏目定位从 c0340 起归入片尾。",
+    "把模型遗漏的 c0352–c0355 告别语放回片尾，原始响应与首次修正记录均保留。"
+  ],
+  "chapters": [
+    {
+      "start_cue_id": "c0001",
+      "end_cue_id": "c0023",
+      "title": "片头与节目介绍",
+      "summary": "介绍栏目及本期关于程序员和产品经理协作的话题。",
+      "kind": "intro",
+      "standalone": false,
+      "review_note": ""
+    },
+    {
+      "start_cue_id": "c0024",
+      "end_cue_id": "c0107",
+      "title": "程序员与产品经理：从双方吐槽看协作摩擦",
+      "summary": "保留程序员和产品经理两方的叙述，讨论插入需求、价值反馈以及不同业务环境下的协作体验。",
+      "kind": "content",
+      "standalone": true,
+      "review_note": ""
+    },
+    {
+      "start_cue_id": "c0108",
+      "end_cue_id": "c0171",
+      "title": "需求变更、交付标准与沟通困境",
+      "summary": "讨论双方矛盾的来源、对交付的不同理解、工作被打断以及沟通方式带来的摩擦。",
+      "kind": "content",
+      "standalone": true,
+      "review_note": ""
+    },
+    {
+      "start_cue_id": "c0172",
+      "end_cue_id": "c0220",
+      "title": "团队需要什么样的产品与技术人才",
+      "summary": "讨论产品经理的技术边界感、补齐沟通短板以及技术人员如何将职业成长与真实业务连接。",
+      "kind": "content",
+      "standalone": true,
+      "review_note": ""
+    },
+    {
+      "start_cue_id": "c0221",
+      "end_cue_id": "c0252",
+      "title": "产品与运营如何在生命周期中协作",
+      "summary": "讨论运营的作用、何时介入以及通过技术理解或第三方工具减少无效需求。",
+      "kind": "content",
+      "standalone": true,
+      "review_note": ""
+    },
+    {
+      "start_cue_id": "c0253",
+      "end_cue_id": "c0277",
+      "title": "海外公司的产品与技术协作经验",
+      "summary": "以海外技术公司的经验比较产品和开发岗位的关系，并讨论技术人员对产品工作的文化认知。",
+      "kind": "content",
+      "standalone": true,
+      "review_note": ""
+    },
+    {
+      "start_cue_id": "c0278",
+      "end_cue_id": "c0313",
+      "title": "产品经理的职责细分与共同目标",
+      "summary": "讨论产品经理定位模糊带来的问题，结合职能细分的例子强调平等沟通和先对齐目标。",
+      "kind": "content",
+      "standalone": true,
+      "review_note": ""
+    },
+    {
+      "start_cue_id": "c0314",
+      "end_cue_id": "c0339",
+      "title": "跨界理解、技术边界与减少内耗",
+      "summary": "通过合作经历讨论技术边界、好奇心和跨界思考，并提出围绕问题与共同目标开展协作。",
+      "kind": "content",
+      "standalone": true,
+      "review_note": ""
+    },
+    {
+      "start_cue_id": "c0340",
+      "end_cue_id": "c0355",
+      "title": "栏目定位、听友邀请与告别",
+      "summary": "说明栏目强调人与人的沟通，邀请听友参与并结束本期节目。",
+      "kind": "outro",
+      "standalone": false,
+      "review_note": ""
+    },
+    {
+      "start_cue_id": "c0356",
+      "end_cue_id": "c0358",
+      "title": "节目推广与赞助信息",
+      "summary": "介绍播客网络其他节目、周边、听友群及录音设备赞助。",
+      "kind": "advertisement",
+      "standalone": false,
+      "review_note": ""
+    }
+  ]
+}
