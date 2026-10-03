@@ -21,7 +21,9 @@ def hosted_audio(row, assets, origin):
     if not asset or asset['sha256'] != row['sha256']:
         raise ValueError('Missing or stale uploaded audio: ' + row['id'])
     parsed = urlparse(asset['url'])
-    if parsed.scheme != 'https' or parsed.netloc != urlparse(origin).netloc or not parsed.path.startswith('/audio/') or not parsed.path.endswith('.mp3') or parsed.query or parsed.fragment:
+    suffix = Path(parsed.path).suffix
+    expected_type = {'.mp3': 'audio/mpeg', '.m4a': 'audio/mp4'}.get(suffix)
+    if parsed.scheme != 'https' or parsed.netloc != urlparse(origin).netloc or not parsed.path.startswith('/audio/') or not expected_type or asset.get('content_type') != expected_type or parsed.query or parsed.fragment:
         raise ValueError('Unreviewed hosted audio URL: ' + row['id'])
     return asset['url']
 
@@ -91,7 +93,7 @@ def export_snapshot(output=OUTPUT):
                 raise ValueError('Snapshot integrity check failed')
         temporary.replace(output)
     report = dict(**counts, bytes=output.stat().st_size, sha256=hashlib.sha256(output.read_bytes()).hexdigest(),
-                  source_sha256=meta['source_sha256'], audio_policy='hosted_local_mp3', audio_origin=origin)
+                  source_sha256=meta['source_sha256'], audio_policy='hosted_local_audio', audio_origin=origin)
     output.with_suffix('.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
     return report
 

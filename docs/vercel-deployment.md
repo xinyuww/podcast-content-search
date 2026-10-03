@@ -82,12 +82,14 @@ NO_PROXY=localhost,127.0.0.1 NODE_USE_ENV_PROXY=1 npm run dev
 - 在 GitHub Desktop 添加 worktree 只是管理界面的选择，不是自动部署的前提；决定部署目标的是 push 的分支。
 - CLI 部署仍可用于手动发布，但日常更新以 GitHub 分支流程为准。
 
+2026-10-03 播放问题排查：发现 5 期 M4A/AAC 被错误命名并发布为 MP3 / `audio/mpeg`，包含固定 Demo 首段。发布脚本现按文件头识别容器，使用新的 `.m4a` 地址和 `audio/mp4`，避免缓存旧的错误类型。原文件字节与时间轴不变，源数据库和字幕无需重建。通过当前代理读取 Demo 首集前 1.5 MB 实测约 28 秒，旧播放器会在 20 秒时打断仍有进展的加载；已改为进展感知的停滞计时。新增格式、快照及线上媒体类型校验脚本。本地 56 项网页测试、43 项 Python 测试、6 项生产页面/API 测试、类型检查、lint 和构建通过。修正后的云端分段检查与解码检查未获执行许可，尚未执行；浏览器自动化不可用，最终出声和进度条仍需实机验收。
+
 ## 音频发布流程
 
-专用公开 Blob store：`podcast-demo-audio` / `store_ELsFDSRO8QRM3Ptd`，iad1，连接本项目 production 和 development，使用 OIDC 身份认证。存储约 625 MiB 的 15 个原始 MP3。按用户指定的合法使用素材演示假设发布，保留原节目链接。
+专用公开 Blob store：`podcast-demo-audio` / `store_ELsFDSRO8QRM3Ptd`，iad1，连接本项目 production 和 development，使用 OIDC 身份认证。15 期原音频共约 625 MiB，实际包含 10 个 MP3 和 5 个 M4A/AAC；本地缓存统一使用 `.mp3` 后缀，不代表真实格式。按用户指定的合法使用素材演示假设发布，保留原节目链接。
 
 1. 本地登录 Vercel CLI，刷新该项目 development 环境的 OIDC 凭据（不输出 `.env.local`）。设置 `VERCEL_CLI` 为已安装 CLI 的绝对路径。
-2. 运行以下命令；本机如需代理，使用上文环境变量。上传脚本先核对原文件 SHA-256，按带内容哈希的路径上传，逐个保存结果，重跑可跳过已完成项目。
+2. 运行以下命令；本机如需代理，使用上文环境变量。上传脚本先核对原文件 SHA-256，读取文件头识别真实容器，以 `.mp3` / `audio/mpeg` 或 `.m4a` / `audio/mp4` 发布，按带内容哈希的路径上传，逐个保存结果，重跑可跳过已完成项目。
 
 ```sh
 BLOB_STORE_ID=store_ELsFDSRO8QRM3Ptd node --env-file=.env.local scripts/upload-audio.mjs
@@ -96,9 +98,9 @@ npm run snapshot:export
 npm run snapshot:verify
 ```
 
-3. `data/hosted-audio.json` 记录 URL、哈希与字节数；`lib/audio-host.json` 固定允许的托管域名。验证脚本对每期文件开头和中间发 Range 请求，要求 HTTP 206、正确 Content-Range 和与本地完全相同的字节；报告写入 `outputs/hosted-audio-verification.json`。
+3. `data/hosted-audio.json` 记录 URL、哈希、字节数与真实媒体类型；`lib/audio-host.json` 固定允许的托管域名。验证脚本对每期文件开头和中间发 Range 请求，要求 HTTP 206、正确 Content-Range、与实际容器一致的 Content-Type 和与本地完全相同的字节；报告写入 `outputs/hosted-audio-verification.json`。
 4. 导出快照会核对上传记录与源数据库音频哈希，保留原文件时间轴，将固定拼盘和全部章节的播放地址一起替换。没有官方地址回退。
-5. 运行功能测试、构建与生产 HTTP 测试后重新部署。播放器加载超过 20 秒会显示可重试错误，避免一直停在加载状态。
+5. 运行功能测试、构建与生产 HTTP 测试后重新部署。播放器连续 20 秒无加载进展才显示可重试错误；实际下载进展会重置停滞计时，但总加载上限为 120 秒。暂停、切片和销毁时清理计时器。
 
 Hobby 的 Blob 存储和传输受免费额度限制，查看 [官方额度说明](https://vercel.com/docs/vercel-blob/usage-and-pricing)；音频传输流量随试听次数增长。
 

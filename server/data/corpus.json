@@ -5,8 +5,8 @@
   "embeddings": 165,
   "cues": 4157,
   "bytes": 5120000,
-  "sha256": "361b699891c403b5b338a61aca286a9460b990b88fbc2a471ff762e1c48b4c08",
+  "sha256": "496aab4f6d2b0a9b2289669841c93bd694b8717adc0f30777aaafe95ec9cdccc",
   "source_sha256": "4036a83e58af5c410c96419ea8e2aaa7e1586b8893db7d2a4b9dcdfb78503663",
-  "audio_policy": "hosted_local_mp3",
+  "audio_policy": "hosted_local_audio",
   "audio_origin": "https://elsfdsro8qrm3ptd.public.blob.vercel-storage.com"
 }

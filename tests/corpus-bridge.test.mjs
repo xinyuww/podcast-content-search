@@ -17,5 +17,7 @@ test("client accepts complete chapter playlists and rejects duration or URL corr
 // A playlist may only point at the dedicated store, not arbitrary external URLs.
 test("audio URL allowlist accepts only this demo store", () => {
   assert(isHostedAudioUrl(`${AUDIO_ORIGIN}/audio/example.mp3`));
+  assert(isHostedAudioUrl(`${AUDIO_ORIGIN}/audio/example.m4a`));
+  assert.equal(isHostedAudioUrl(`${AUDIO_ORIGIN}/audio/example.wav`), false);
   for (const url of ["https://tk.wavpub.com/example.mp3", `${AUDIO_ORIGIN}.evil.test/audio/example.mp3`, `${AUDIO_ORIGIN}/audio/example.mp3?download=1`, "http://localhost/audio/example.mp3", `${AUDIO_ORIGIN}/other/example.mp3`]) assert.equal(isHostedAudioUrl(url), false);
 });

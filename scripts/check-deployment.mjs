@@ -17,7 +17,7 @@ try {
     assert.equal(db.prepare(`SELECT count(*) AS n FROM ${table}`).get().n, expected, `Unexpected ${table} count`);
   }
   assert.equal(db.prepare("SELECT count(*) AS n FROM chapters WHERE eligible=1").get().n, 164);
-  assert.equal(manifest.audio_policy, "hosted_local_mp3");
+  assert.equal(manifest.audio_policy, "hosted_local_audio");
   for (const row of db.prepare("SELECT payload_json FROM episodes").all()) {
     assert(isHostedAudioUrl(JSON.parse(row.payload_json).audioUrl), "Every episode must use the dedicated audio store");
   }

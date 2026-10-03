@@ -33,6 +33,7 @@ export class PlaylistPlayer {
   private readonly createAudio: () => HTMLAudioElement;
   private boundaryTimer: ReturnType<typeof setTimeout> | null = null;
   private loadingTimer: ReturnType<typeof setTimeout> | null = null;
+  private loadingDeadline: ReturnType<typeof setTimeout> | null = null;
 
   constructor(items: PlaylistItem[], createAudio = () => new Audio()) {
     if (!items.length) throw new Error("A playlist must contain audio.");
@@ -52,23 +53,40 @@ export class PlaylistPlayer {
     return () => { this.listeners.delete(listener); };
   };
 
-  private update(change: Partial<PlayerState>) {
-    this.state = { ...this.state, ...change };
-    if (this.state.phase === "loading" && !this.loadingTimer) {
+  private clearLoadingTimers() {
+    if (this.loadingTimer) clearTimeout(this.loadingTimer);
+    if (this.loadingDeadline) clearTimeout(this.loadingDeadline);
+    this.loadingTimer = null;
+    this.loadingDeadline = null;
+  }
+
+  private watchLoading(progress = false) {
+    if (this.state.phase !== "loading") { this.clearLoadingTimers(); return; }
+    if (progress && this.loadingTimer) {
+      clearTimeout(this.loadingTimer);
+      this.loadingTimer = null;
+    }
+    if (!this.loadingTimer) {
       this.loadingTimer = setTimeout(() => {
         this.loadingTimer = null;
         if (this.state.phase === "loading") this.fail("音频加载超时，请检查网络后重试播放。");
       }, 20000);
-    } else if (this.state.phase !== "loading" && this.loadingTimer) {
-      clearTimeout(this.loadingTimer);
-      this.loadingTimer = null;
     }
+    // Progress may extend the stall timeout, but never allow an endless download.
+    if (!this.loadingDeadline) this.loadingDeadline = setTimeout(() => {
+      this.loadingDeadline = null;
+      if (this.state.phase === "loading") this.fail("音频加载耗时过长，请切换网络后重试播放。");
+    }, 120000);
+  }
+
+  private update(change: Partial<PlayerState>) {
+    this.state = { ...this.state, ...change };
+    this.watchLoading();
     this.listeners.forEach((listener) => listener());
   }
 
   private release() {
-    if (this.loadingTimer) clearTimeout(this.loadingTimer);
-    this.loadingTimer = null;
+    this.clearLoadingTimers();
     if (this.boundaryTimer) clearTimeout(this.boundaryTimer);
     this.boundaryTimer = null;
     const previous = this.audio;
@@ -119,6 +137,7 @@ export class PlaylistPlayer {
     };
     audio.addEventListener("loadedmetadata", () => {
       if (!current()) return;
+      this.watchLoading(true);
       audio.currentTime = sourceOffset + clamp(this.state.time, Math.min(duration, Math.max(0, (audio.duration || sourceOffset + duration) - sourceOffset)));
       checkBoundary();
     });
@@ -129,7 +148,12 @@ export class PlaylistPlayer {
       }
     });
     audio.addEventListener("playing", () => {
-      if (current()) { this.update({ phase: "playing", error: null }); checkBoundary(); }
+      if (!current()) return;
+      if (!this.wantsPlay) { audio.pause(); return; }
+      this.update({ phase: "playing", error: null }); checkBoundary();
+    });
+    audio.addEventListener("progress", () => {
+      if (current() && this.wantsPlay) this.watchLoading(true);
     });
     audio.addEventListener("pause", () => {
       if (current() && !audio.ended && this.state.phase !== "error") this.update({ phase: "paused" });

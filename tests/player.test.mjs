@@ -76,6 +76,42 @@ test("demo has 3–5 real episodes, 10–30 minutes, with hosted audio and valid
   }
 });
 
+test("slow downloads with real progress can start after 20 seconds", (t) => {
+  t.mock.timers.enable({ apis: ["setTimeout"] });
+  const { player, audios } = setup();
+  player.restart(); audios[0].emit("waiting");
+  t.mock.timers.tick(15000); audios[0].emit("progress");
+  t.mock.timers.tick(15000);
+  assert.equal(player.getSnapshot().phase, "loading");
+  audios[0].metadata(); audios[0].emit("playing"); audios[0].tick(2);
+  t.mock.timers.tick(120000);
+  assert.equal(player.getSnapshot().phase, "playing");
+  assert.equal(player.getSnapshot().time, 2);
+  player.dispose();
+});
+
+test("progress cannot extend loading forever, and late playing cannot undo an error", (t) => {
+  t.mock.timers.enable({ apis: ["setTimeout"] });
+  const { player, audios } = setup();
+  player.restart(); audios[0].emit("waiting");
+  for (let i = 0; i < 8; i++) { t.mock.timers.tick(15000); audios[0].emit("progress"); }
+  assert.equal(player.getSnapshot().phase, "error");
+  audios[0].paused = false; audios[0].emit("playing");
+  assert.equal(player.getSnapshot().phase, "error");
+  assert.equal(audios[0].paused, true);
+  player.dispose();
+});
+
+test("progress from a released source cannot keep the new source loading", (t) => {
+  t.mock.timers.enable({ apis: ["setTimeout"] });
+  const { player, audios } = setup();
+  player.restart(); player.next(); audios[1].emit("waiting");
+  t.mock.timers.tick(15000); audios[0].emit("progress");
+  t.mock.timers.tick(5000);
+  assert.equal(player.getSnapshot().phase, "error");
+  player.dispose();
+});
+
 test("pause/resume retains the clip position without reloading", async () => {
   const { player, audios } = setup();
   player.select(0); audios[0].metadata(); audios[0].tick(42);

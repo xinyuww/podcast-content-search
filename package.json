@@ -16,7 +16,7 @@
     "test:needs": "node --experimental-strip-types --test tests/needs.test.mjs",
     "needs:evaluate": "node --experimental-strip-types scripts/evaluate_needs.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
-    "test:web": "node --experimental-strip-types --test tests/player.test.mjs tests/needs.test.mjs tests/corpus-bridge.test.mjs tests/retrieval.test.mjs",
+    "test:web": "node --experimental-strip-types --test tests/player.test.mjs tests/needs.test.mjs tests/corpus-bridge.test.mjs tests/retrieval.test.mjs tests/audio-format.test.mjs",
     "test:python": ".venv/bin/python -m unittest discover -s tests -p 'test_*.py'",
     "snapshot:export": ".venv/bin/python -m backend.pipelines.export_web_snapshot",
     "snapshot:verify": "node scripts/check-deployment.mjs",

@@ -1,7 +1,8 @@
-/** Local-only publishing of the 15 downloaded MP3s. Never imported by the web app. */
+/** Local-only publishing of 15 originals with their actual container/MIME type. */
 import { DatabaseSync } from "node:sqlite";
 import { createHash } from "node:crypto";
-import { readFile, writeFile, stat } from "node:fs/promises";
+import { readFile, writeFile, stat, open } from "node:fs/promises";
+import { detectAudioFormat } from "./audio-format.mjs";
 import { createReadStream } from "node:fs";
 import { resolve, relative } from "node:path";
 import { spawn } from "node:child_process";
@@ -24,20 +25,29 @@ for (const row of rows) {
   for await (const bytes of createReadStream(file)) hash.update(bytes);
   const sha256 = hash.digest("hex");
   if (sha256 !== row.sha256) throw new Error(`Audio hash changed: ${row.id}`);
-  if (manifest.episodes[row.id]?.sha256 === sha256) { console.log(`Already uploaded: ${row.id}`); continue; }
-  const pathname = `audio/${row.id}-${sha256.slice(0, 16)}.mp3`;
+  const handle = await open(file);
+  const header = Buffer.alloc(16);
+  try { await handle.read(header, 0, header.length, 0); } finally { await handle.close(); }
+  const { extension, contentType } = detectAudioFormat(header);
+  const pathname = `audio/${row.id}-${sha256.slice(0, 16)}.${extension}`;
+  const existing = manifest.episodes[row.id];
+  if (existing?.sha256 === sha256 && new URL(existing.url).pathname === "/" + pathname) {
+    existing.content_type = contentType;
+    await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + "\n");
+    console.log(`Already uploaded: ${row.id}`); continue;
+  }
   console.log(`Uploading: ${row.id}`);
   const output = await new Promise((ok, fail) => {
-    const child = spawn(cli, ["blob", "put", file, "--access", "public", "--pathname", pathname, "--content-type", "audio/mpeg", "--scope", "xwei1"], { env: process.env, stdio: ["ignore", "pipe", "pipe"] });
+    const child = spawn(cli, ["blob", "put", file, "--access", "public", "--pathname", pathname, "--content-type", contentType, "--scope", "xwei1"], { env: process.env, stdio: ["ignore", "pipe", "pipe"] });
     let text = "";
     for (const stream of [child.stdout, child.stderr]) stream.on("data", b => { text = (text + b.toString()).slice(-32000); });
     child.on("error", fail);
     child.on("exit", code => code === 0 ? ok(text) : fail(new Error(`Upload failed (${row.id}): ${text.slice(-1200)}`)));
   });
-  const urls = String(output).match(/https:\/\/[a-z0-9]+\.public\.blob\.vercel-storage\.com\/[^\s"<>]+\.mp3/g);
+  const urls = String(output).match(/https:\/\/[a-z0-9]+\.public\.blob\.vercel-storage\.com\/[^\s"<>]+\.(?:mp3|m4a)/g);
   const url = urls?.find(u => new URL(u).pathname === "/" + pathname);
-  if (!url) throw new Error("Upload returned no matching MP3 URL: " + row.id);
-  manifest.episodes[row.id] = { url, sha256, bytes: (await stat(file)).size };
+  if (!url) throw new Error("Upload returned no matching audio URL: " + row.id);
+  manifest.episodes[row.id] = { url, sha256, bytes: (await stat(file)).size, content_type: contentType };
   await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + "\n");
   console.log(`Uploaded ${Object.keys(manifest.episodes).length}/15: ${row.id}`);
 }

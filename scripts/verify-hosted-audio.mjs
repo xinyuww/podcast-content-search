@@ -1,8 +1,9 @@
-/** Verify public MP3 delivery and seeking against bytes from the local originals. */
+/** Verify public delivery, actual container/MIME agreement and byte-range seeking. */
 import assert from "node:assert/strict";
 import { readFile, open, writeFile } from "node:fs/promises";
 import { DatabaseSync } from "node:sqlite";
 import { isHostedAudioUrl } from "../lib/audio-source.ts";
+import { detectAudioFormat } from "./audio-format.mjs";
 const manifest = JSON.parse(await readFile("data/hosted-audio.json", "utf8"));
 const db = new DatabaseSync("data/podcasts.sqlite3", { readOnly: true });
 const rows = db.prepare("SELECT episode_id,local_path FROM source_assets WHERE kind='audio' ORDER BY episode_id").all();
@@ -16,17 +17,22 @@ for (const row of rows) {
   assert(isHostedAudioUrl(asset.url));
   const file = await open(row.local_path);
   try {
+    const header = Buffer.alloc(16);
+    await file.read(header, 0, header.length, 0);
+    const format = detectAudioFormat(header);
+    assert.equal(asset.content_type, format.contentType);
+    assert(new URL(asset.url).pathname.endsWith(`.${format.extension}`));
     for (const start of [0, Math.floor(asset.bytes / 2)]) {
       const end = start + 1023;
       const r = await fetch(asset.url, { headers: { Range: `bytes=${start}-${end}`, Referer: "https://podcast-content-search.vercel.app/" }, signal: AbortSignal.timeout(30000) });
       if (r.status !== 206) { await r.body?.cancel(); throw new Error(`Range request failed: ${row.episode_id} HTTP ${r.status}`); }
       assert.equal(r.headers.get("content-range"), `bytes ${start}-${end}/${asset.bytes}`);
-      assert.match(r.headers.get("content-type"), /^audio\/mpeg/);
+      assert.equal(r.headers.get("content-type")?.split(";")[0], format.contentType);
       const expected = Buffer.alloc(1024);
       await file.read(expected, 0, 1024, start);
       assert.deepEqual(Buffer.from(await r.arrayBuffer()), expected);
     }
-    results.push({ episode_id: row.episode_id, range_status: 206, head_and_middle_bytes_match: true });
+    results.push({ episode_id: row.episode_id, content_type: format.contentType, range_status: 206, head_and_middle_bytes_match: true });
     console.log(`Verified audio byte ranges: ${row.episode_id}`);
   } finally { await file.close(); }
 }

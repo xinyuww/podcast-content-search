@@ -8,6 +8,6 @@ export function isHostedAudioUrl(value: unknown): value is string {
     const url = new URL(value);
     return url.origin === AUDIO_ORIGIN && url.protocol === "https:" &&
       !url.username && !url.password && !url.search && !url.hash &&
-      /^\/audio\/[a-z0-9-]+\.mp3$/.test(url.pathname);
+      /^\/audio\/[a-z0-9-]+\.(mp3|m4a)$/.test(url.pathname);
   } catch { return false; }
 }
