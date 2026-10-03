@@ -54,7 +54,7 @@ NO_PROXY=localhost,127.0.0.1 NODE_USE_ENV_PROXY=1 npm run dev
 
 2026-10-02：已部署至 https://podcast-content-search.vercel.app 。48 项功能测试、5 项生产 HTTP 测试和 8 轮真实模型合成对话验收通过。需求模型遇到已完成但原话依据无效的输出时最多重新生成一次，两次共用 45 秒截止时间；拒绝和网络错误不重试。两条数据 API 的构建追踪包含 SQLite 快照。匿名公网访问首页、固定拼盘和真实对话/检索接口均成功；一个合成编程需求约 6 秒生成 3 段、779.548 秒拼盘。数据库、本地音频与 .env.local 路径均返回 404。浏览器自动化会话不可用，实际音频播放和手机端交互仍待人工试听。
 
-部署空间：`xwei1`（Hobby）；项目：`podcast-content-search`。当前通过 CLI 发布，GitHub 自动部署未连接，不影响公开链接。
+部署空间：`xwei1`（Hobby）；项目：`podcast-content-search`。最初通过 CLI 发布；2026-10-03 已连接 `xinyuww/podcast-content-search`，启用 GitHub 自动部署。
 
 上述 2026-10-02 版本的部署：`dpl_5jezMs9UYLcpUeJmvzomPKug1g7c`（使用官方音源，已由用户反馈播放失败）。`baseline-browser-mapping` 已更新到安全补丁版本；当时 `npm audit --omit=dev` 为 0 项已知漏洞。开发工具依赖仍有 8 项告警（7 high、1 low），未将其描述为全项目安全审计通过。
 
@@ -70,7 +70,17 @@ NO_PROXY=localhost,127.0.0.1 NODE_USE_ENV_PROXY=1 npm run dev
 
 `vercel.json` 选择 iad1 部署区域，API 最大执行时间 60 秒。应用设置输入大小限制、同源校验、超时和单实例并发上限。已在 Vercel Firewall 启用 `Demo API rate limit`：对 `/api/` 下 POST 请求按 IP 限制为每 60 秒 12 次。此限制不是全局消费金额上限，也不能完全防止分布式滥用；继续在 OpenAI 项目侧管理用量。不要把只读 SQLite 改为用户访问计数器。
 
-专用 `OPENAI_API_KEY` 仅存于项目 Production Secret，未写入代码或部署文件。`.env.local` 和 `.vercel/` 均被 Git 忽略。公开域名不需要 Vercel 登录，部署预览地址可能保留平台保护。
+专用 `OPENAI_API_KEY` 保存在项目 Production 和 Preview Secret，未写入代码或 Git 仓库。`.env.local` 和 `.vercel/` 均被 Git 忽略。公开域名不需要 Vercel 登录，部署预览地址保留现有平台保护。
+
+## GitHub 自动部署
+
+- 仓库：`xinyuww/podcast-content-search`；生产分支：`main`；Preview 部署已启用，没有额外的忽略构建命令。
+- 将修改 commit 后 push 到开发分支（例如 `codex/ui-design`），Vercel 自动构建并生成预览链接。在 Vercel Deployments 中按分支查看状态和链接。
+- 预览确认后，把开发分支合并到 `main` 并 push，成功构建后正式域名 `https://podcast-content-search.vercel.app` 自动更新。仅本地 commit 或 merge 不会更新网站。
+- GitHub 提供代码和只读 SQLite 快照；Vercel 注入对应环境的服务端 Secret。无需上传 `.env.local`，也不需要把 Secret 写进 GitHub Actions。
+- 预览和正式版都读取同一批 Blob 音频，不重新上传或转录。公开音频读取不需要 Blob 写入凭据。
+- 在 GitHub Desktop 添加 worktree 只是管理界面的选择，不是自动部署的前提；决定部署目标的是 push 的分支。
+- CLI 部署仍可用于手动发布，但日常更新以 GitHub 分支流程为准。
 
 ## 音频发布流程
 
